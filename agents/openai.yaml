@@ -1,4 +1,4 @@
 interface:
-  display_name: "TV Vibehack Safe"
+  display_name: "TV Vibehack Skill"
   short_description: "Plan TV changes with evidence and scoped recovery"
-  default_prompt: "Use $tv-vibehack-safe to audit my Android TV and prepare a reversible plan before any device changes."
+  default_prompt: "Use $tv-vibehack-skill to audit my Android TV and prepare a reversible plan before any device changes."
