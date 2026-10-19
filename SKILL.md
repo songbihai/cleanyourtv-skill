@@ -1,13 +1,13 @@
 ---
-name: tv-vibehack-safe
+name: tv-vibehack-skill
 description: Audit Android TV or Google TV packages, prepare reversible debloat plans, and build or configure the tv-vibehack launcher with explicit device targeting and recovery evidence. Use for tv-vibehack tasks on an owned or authorized TV; not for Tizen, webOS, firmware flashing, or unrestricted Android administration.
-license: MIT
+license: MIT for instructions and helpers; promotional images have separate terms in assets/tvremotex/NOTICE.md
 metadata:
-  version: "0.2.0"
+  version: "0.2.1"
   upstream: "https://github.com/Gathin23/tv-vibehack"
 ---
 
-# TV Vibehack Safe
+# TV Vibehack Skill
 
 Help the user customize an authorized Android TV or Google TV while preserving a working Home screen, input controls, network access, and a recovery path. The core is readable Markdown; reliable execution must be evaluated for each model and host. Tool execution depends on the host; instructions do not grant permissions or enforce a sandbox.
 
