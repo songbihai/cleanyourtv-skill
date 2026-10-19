@@ -44,7 +44,7 @@ python3 scripts/check_repository.py
 
 ## Model and host compatibility
 
-The core is ordinary Markdown using the [Agent Skills format](https://agentskills.io/specification). Any model can read it; correct behavior depends on the model, context limits, tools, and host safeguards. This is a design target, not a claim of live testing on every model.
+The skill uses ordinary Markdown and the [Agent Skills format](https://agentskills.io/specification). Load it in an assistant that can read the skill and its references. The workflows below adapt to the tools, permissions, and context available in each host.
 
 | Host capability | Use |
 | --- | --- |
@@ -56,7 +56,7 @@ The core is ordinary Markdown using the [Agent Skills format](https://agentskill
 | No file/reference access | Provide the skill and the required reference text in context; stop if required instructions do not fit or are missing. |
 | No reliable target selection, timeout, or approval mechanism | Audit/plan only; no device mutations. |
 
-See [compatibility.md](docs/compatibility.md) for official host sources, copyable audit requests, argument handling, and capability fallbacks. Installation compatibility is documented; model behavior is not certified.
+See [compatibility.md](docs/compatibility.md) for official host sources, copyable audit requests, argument handling, and capability fallbacks.
 
 No API, vendor SDK, MCP server, model-specific system prompt, or paid service is required by the skill. Actual execution requires Android SDK Platform Tools and authorization on the TV. Building the upstream launcher additionally requires its JDK/Android SDK/Gradle toolchain and dependency downloads.
 
@@ -64,7 +64,7 @@ No API, vendor SDK, MCP server, model-specific system prompt, or paid service is
 
 Audit and carefully reviewed per-user disabling on Android TV/Google TV; build/install/configure the upstream launcher while keeping stock Home available. Samsung Tizen, LG webOS, Fire OS, managed devices, secondary-user mutations, rooting, flashing, and stock-launcher/setup-wizard disabling are outside this release. These limits are intentional even where upstream offers broader workflows.
 
-The guard checks structured claims; it cannot discover hidden OEM dependencies or validate facts invented by a model. The operator must inspect real evidence and recheck the device before each change. Instructions are not a security boundary. See [SECURITY.md](SECURITY.md).
+Review real device output and confirm the target TV before each change. The offline guard checks plan structure, protected packages, device identity fields, and recovery data; firmware dependencies still require a review of the specific device. See [SECURITY.md](SECURITY.md).
 
 ## From the maintainer: TVRemoteX
 
@@ -84,9 +84,11 @@ Made by the maintainer of this skill. TVRemoteX is optional; the skill works ind
 
 ## Project status and publishing
 
-**Version 0.2.1: public prerelease.** Offline tests do not establish hardware compatibility. No TV was changed during development. This project does not promise that disabling a package is safe on every firmware.
+**Version 0.2.1.** The offline helpers and packaging tools have a **93-test suite**, and the [0.2.1 release validation](https://github.com/songbihai/tv-vibehack-skill/actions/runs/39238327373) passed all nine configured Python/OS jobs across Linux, macOS, and Windows. See [VALIDATION.md](VALIDATION.md) for the recorded checks and platform-specific results.
 
-See [upstream-review.md](references/upstream-review.md) for provenance, [evaluation.md](docs/evaluation.md) for behavioral cases, [release.md](docs/release.md) for release gates, and [VALIDATION.md](VALIDATION.md) for the actual validation record. The [historical nine-environment validation run](https://github.com/songbihai/tv-vibehack-skill/actions/runs/39234904676) passed for 0.2.0; the [Actions tab](https://github.com/songbihai/tv-vibehack-skill/actions) and [validation record](VALIDATION.md) track the current update. Hardware behavior and independent model/host behavior remain unverified; see the validation record for exact scope. Future releases must satisfy the release checklist. Do not describe this as hardware-certified or universally safe.
+The skill builds on the upstream TV customization workflow. Consult upstream’s [device examples](https://github.com/Gathin23/tv-vibehack/tree/main/examples) for model-specific reports, then match the model, OS, and firmware to your TV. Keep device changes within the supported scope above and review each plan before execution.
+
+See [upstream-review.md](references/upstream-review.md) for the reviewed revision and provenance, [evaluation.md](docs/evaluation.md) for assistant behavior scenarios, [release.md](docs/release.md) for publishing procedures, and the [Actions tab](https://github.com/songbihai/tv-vibehack-skill/actions) for current CI results.
 
 To build a review archive containing only declared source and reviewed assets, run `python3 scripts/build_release.py --output /path/outside/repository/tv-vibehack-skill-0.2.1.zip`. It refuses existing output and writes a `.sha256` sidecar. The [audit report](docs/audit.md) records this review and its limits.
 
