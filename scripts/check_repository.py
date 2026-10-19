@@ -2,6 +2,8 @@
 """Validate declared source files. Not an exhaustive secret scan or a sandbox."""
 
 import ast
+import hashlib
+from html.parser import HTMLParser
 import json
 import os
 from pathlib import Path
@@ -9,6 +11,13 @@ import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+# Only these reviewed promotional bytes may bypass UTF-8 source checks.
+PINNED_ASSETS = {
+    'assets/tvremotex/logo.png': 'edbcc77cc85d68ce09781c0b863321b96409ebf39726513afc14ad041541ecee',
+    'assets/tvremotex/01-brands-en-US.png': '05284cef80431bc1c897bcdd4c3577ad11811b5f901696a18e8a105530a89a41',
+    'assets/tvremotex/02-power-and-apps-en-US.png': 'fb870e5c3b43cf52bc336f83fec2cb14943c5effb67715f5b13c7c595b4789ef',
+    'assets/tvremotex/03-keyboard-and-touchpad-en-US.png': '2c55b7aa56b44d8e2e990f7048ebe61970ea9c8638ff22efb81f534cae6bad6f',
+}
 # The release builder uses this exact manifest, never an arbitrary directory zip.
 DISTRIBUTION_FILES = tuple(sorted((
     'SKILL.md', 'README.md', 'LICENSE', 'NOTICE', 'SECURITY.md', 'CONTRIBUTING.md',
@@ -20,9 +29,11 @@ DISTRIBUTION_FILES = tuple(sorted((
     'docs/release.md', 'docs/compatibility.md', 'docs/audit.md', 'scripts/plan_guard.py',
     'scripts/check_repository.py', 'scripts/build_release.py', 'tests/test_plan_guard.py',
     'tests/test_release_tools.py', 'examples/snapshot.synthetic.json', 'examples/plan.synthetic.json',
-)))
+    'assets/tvremotex/NOTICE.md',
+) + tuple(PINNED_ASSETS)))
 IGNORED_LOCAL_DIRS = {'.git', '__pycache__', '.venv', 'venv', '.pytest_cache'}
 MAX_FILE_BYTES = 1_048_576
+MAX_ASSET_BYTES = 2_097_152
 SECRET_RE = re.compile(
     r'-----BEGIN (?:[A-Z0-9]+ )*PRIVATE KEY-----|'
     r'\bgh[pousr]_[A-Za-z0-9]{20,}\b|\bgithub_pat_[A-Za-z0-9_]{40,}\b'
@@ -42,11 +53,22 @@ def _unique_object(pairs):
     return result
 
 
+class _HTMLReferences(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.targets = []
+
+    def handle_starttag(self, tag, attrs):
+        for name, value in attrs:
+            if (tag, name) in (('img', 'src'), ('a', 'href')) and value:
+                self.targets.append(value)
+
+
 def check(root=ROOT):
     root = Path(root).resolve()
     if not root.is_dir():
         return ['Source root is missing or not a directory']
-    errors, content_by_name = [], {}
+    errors, content_by_name, readable = [], {}, set()
     allowed = set(DISTRIBUTION_FILES)
     directories = {str(parent).replace(os.sep, '/') for name in allowed
                    for parent in Path(name).parents if str(parent) != '.'}
@@ -73,11 +95,20 @@ def check(root=ROOT):
                 errors.append(f'Unexpected source file: {rel}')
                 continue
             try:
-                if not path.is_file() or path.stat().st_size > MAX_FILE_BYTES:
+                bound = MAX_ASSET_BYTES if rel in PINNED_ASSETS else MAX_FILE_BYTES
+                if not path.is_file() or path.stat().st_size > bound:
                     errors.append(f'Not a bounded regular source file: {rel}')
+                    continue
+                if rel in PINNED_ASSETS:
+                    data = path.read_bytes()
+                    if hashlib.sha256(data).hexdigest() != PINNED_ASSETS[rel]:
+                        errors.append(f'Reviewed promotional asset differs: {rel}')
+                        continue
+                    readable.add(rel)
                     continue
                 content = path.read_text(encoding='utf-8')
                 content_by_name[rel] = content
+                readable.add(rel)
                 if SECRET_RE.search(content):
                     # Do not print matching bytes or private data.
                     errors.append(f'Recognizable credential pattern in: {rel}')
@@ -88,7 +119,10 @@ def check(root=ROOT):
                 if path.suffix == '.py':
                     ast.parse(content)
                 if path.suffix == '.md':
-                    for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)', content):
+                    html = _HTMLReferences()
+                    html.feed(content)
+                    targets = re.findall(r'\[[^\]]*\]\(([^)]+)\)', content) + html.targets
+                    for target in targets:
                         if target.startswith(('https://', 'http://', '#')):
                             continue
                         dest = (path.parent / target.split('#')[0]).resolve()
@@ -96,7 +130,7 @@ def check(root=ROOT):
                             errors.append(f'Broken or external local reference in: {rel}')
             except (OSError, UnicodeError, ValueError, RecursionError, SyntaxError):
                 errors.append(f'Cannot parse source file: {rel}')
-    for missing in sorted(allowed - set(content_by_name)):
+    for missing in sorted(allowed - readable):
         errors.append(f'Missing readable declared file: {missing}')
     skill = content_by_name.get('SKILL.md', '')
     parts = skill.split('---', 2)
@@ -104,7 +138,7 @@ def check(root=ROOT):
         errors.append('SKILL.md needs complete YAML frontmatter')
     else:
         front = parts[1]
-        if not re.search(r'^name: tv-vibehack-safe$', front, re.MULTILINE):
+        if not re.search(r'^name: tv-vibehack-skill$', front, re.MULTILINE):
             errors.append('Invalid skill name')
         if not re.search(r'^description: .+', front, re.MULTILINE):
             errors.append('Skill description is missing')
