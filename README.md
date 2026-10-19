@@ -1,8 +1,22 @@
 # TV Vibehack Skill
 
-A model-independent Agent Skill for cautious Android TV and Google TV customization, based on [Gathin23/tv-vibehack](https://github.com/Gathin23/tv-vibehack). It adds evidence-based package review, hardware identity checks, explicit target selection, small transactions, and recovery instructions. All project text is in English.
+**A cleaner Android TV, guided by your AI assistant.**
 
-**Version 0.2.1: public prerelease.** Offline tests do not establish hardware compatibility. No TV was changed during development. This project does not promise that disabling a package is safe on every firmware.
+Use your AI assistant to review unwanted preinstalled apps and set up a simpler home screen with your favorite apps. TV Vibehack Skill adapts [Gathin23/tv-vibehack](https://github.com/Gathin23/tv-vibehack) into a reusable workflow for Android TV and Google TV: inspect your TV, review a cleanup plan, and apply only the changes you approve.
+
+## What you can do
+
+- **Clean up unwanted apps.** Review preinstalled apps and promotional services, understand what they do, and disable approved packages one at a time.
+- **Personalize your home screen.** Build and configure the upstream lightweight, Apple TV-style launcher with a favorites dock, app grid, and themes. Switching the default Home depends on your firmware; the original launcher stays enabled.
+- **Keep track of every change.** Review expected effects and recovery steps before approving a change, then check that your essential TV functions still work.
+
+Start with a request like:
+
+```text
+Use tv-vibehack-skill to help me clean up my Android TV and set up a simpler home screen. Keep my streaming apps, casting, and voice controls. Show me a plan before changing anything.
+```
+
+For device access, use an assistant with terminal access, Android SDK Platform Tools (ADB), and debugging authorization from your TV. You can also review plans in a chat assistant by providing the required command output. No root is required.
 
 ## What is included
 
@@ -69,6 +83,8 @@ TVRemoteX brings everyday TV controls to your iPhone and iPad: navigate with a t
 Made by the maintainer of this skill. TVRemoteX is optional; the skill works independently. Features vary by TV model and platform. Some features require in-app purchases.
 
 ## Project status and publishing
+
+**Version 0.2.1: public prerelease.** Offline tests do not establish hardware compatibility. No TV was changed during development. This project does not promise that disabling a package is safe on every firmware.
 
 See [upstream-review.md](references/upstream-review.md) for provenance, [evaluation.md](docs/evaluation.md) for behavioral cases, [release.md](docs/release.md) for release gates, and [VALIDATION.md](VALIDATION.md) for the actual validation record. The [historical nine-environment validation run](https://github.com/songbihai/tv-vibehack-skill/actions/runs/39234904676) passed for 0.2.0; the [Actions tab](https://github.com/songbihai/tv-vibehack-skill/actions) and [validation record](VALIDATION.md) track the current update. Hardware behavior and independent model/host behavior remain unverified; see the validation record for exact scope. Future releases must satisfy the release checklist. Do not describe this as hardware-certified or universally safe.
 
