@@ -1,0 +1,20 @@
+{
+  "schema_version": 2,
+  "device": {
+    "serial": "SYNTHETIC-TV-ONLY",
+    "fingerprint": "synthetic/vendor/tv:14/TEST/1:user/test-keys",
+    "platform": "google-tv",
+    "android_sdk": 34,
+    "user_id": 0,
+    "hardware_serial": "SYNTHETIC-HARDWARE-001",
+    "identity_property": "ro.serialno"
+  },
+  "actions": [
+    {
+      "package": "com.example.promotions",
+      "rationale": "Synthetic example of an unwanted standalone promotions app.",
+      "evidence": "Synthetic package dump only; not suitable for a real device.",
+      "verify": "Check Home, Settings, inputs, network, keyboard, remote, and required app playback against baseline."
+    }
+  ]
+}

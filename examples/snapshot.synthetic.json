@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "synthetic": true,
+  "captured_at": "2026-10-19T12:00:00+00:00",
+  "device": {
+    "serial": "SYNTHETIC-TV-ONLY",
+    "fingerprint": "synthetic/vendor/tv:14/TEST/1:user/test-keys",
+    "platform": "google-tv",
+    "android_sdk": 34,
+    "user_id": 0,
+    "hardware_serial": "SYNTHETIC-HARDWARE-001",
+    "identity_property": "ro.serialno"
+  },
+  "current_user": 0,
+  "managed": false,
+  "home_component": "com.vendor.home/.MainActivity",
+  "home_candidates": [
+    "com.vendor.home/.MainActivity"
+  ],
+  "ime_packages": [
+    "com.vendor.keyboard"
+  ],
+  "protected_packages": [
+    "com.vendor.home",
+    "com.vendor.keyboard",
+    "com.vendor.input"
+  ],
+  "critical_review": "Synthetic roles only; no device evidence. Real sessions require full critical-role inspection.",
+  "packages": {
+    "com.vendor.home": {
+      "enabled_setting": 0,
+      "effectively_enabled": true,
+      "installed": true,
+      "hidden": false,
+      "suspended": false,
+      "evidence": "Synthetic stock HOME evidence."
+    },
+    "com.vendor.keyboard": {
+      "enabled_setting": 0,
+      "effectively_enabled": true,
+      "installed": true,
+      "hidden": false,
+      "suspended": false,
+      "evidence": "Synthetic IME evidence."
+    },
+    "com.vendor.input": {
+      "enabled_setting": 0,
+      "effectively_enabled": true,
+      "installed": true,
+      "hidden": false,
+      "suspended": false,
+      "evidence": "Synthetic HDMI/input evidence."
+    },
+    "com.example.promotions": {
+      "enabled_setting": 0,
+      "effectively_enabled": true,
+      "installed": true,
+      "hidden": false,
+      "suspended": false,
+      "evidence": "Synthetic optional standalone promotions app, no observed shared UID or providers."
+    }
+  }
+}
