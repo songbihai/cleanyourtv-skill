@@ -1,0 +1,26 @@
+# Private device evidence and credentials: keep outside the repository.
+sessions/
+backups/
+artifacts/
+adbkey*
+**/adbkey/
+*.pem
+*.key
+*.keystore
+*.jks
+*.apk
+*.aab
+*.log
+.env
+.env.*
+!.env.example
+# Local environments and tooling
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
