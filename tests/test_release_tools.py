@@ -56,12 +56,40 @@ class ReleaseToolTests(unittest.TestCase):
         (self.root / 'device.png').write_bytes(b'not-an-image')
         self.assertRejected()
 
+    def test_changed_promotional_asset_is_rejected(self):
+        asset = self.root / next(iter(checker.PINNED_ASSETS))
+        asset.write_bytes(asset.read_bytes() + b'undisclosed-content')
+        self.assertTrue(any('asset differs' in e for e in self.assertRejected()))
+
+    def test_missing_promotional_asset_is_rejected(self):
+        (self.root / next(iter(checker.PINNED_ASSETS))).unlink()
+        self.assertRejected()
+
+    def test_undeclared_asset_is_rejected(self):
+        (self.root / 'assets/tvremotex/private.png').write_bytes(b'private-evidence')
+        self.assertRejected()
+
+    def test_oversize_promotional_asset_is_rejected(self):
+        (self.root / next(iter(checker.PINNED_ASSETS))).write_bytes(b'x' * (checker.MAX_ASSET_BYTES + 1))
+        self.assertRejected()
+
+    def test_broken_html_image_reference_is_rejected(self):
+        with (self.root / 'README.md').open('a') as stream:
+            stream.write('\n<img src="assets/tvremotex/missing.png" alt="Missing">\n')
+        self.assertRejected()
+
+    def test_external_local_html_image_reference_is_rejected(self):
+        (self.parent / 'private.png').write_bytes(b'private-evidence')
+        with (self.root / 'README.md').open('a') as stream:
+            stream.write("\n<img src='../private.png' alt='Private'>\n")
+        self.assertRejected()
+
     def test_missing_entrypoint_fails_without_traceback(self):
         (self.root / 'SKILL.md').unlink()
         self.assertTrue(any('SKILL.md' in e for e in self.assertRejected()))
 
     def test_incomplete_frontmatter_is_rejected(self):
-        (self.root / 'SKILL.md').write_text('---\nname: tv-vibehack-safe\n')
+        (self.root / 'SKILL.md').write_text('---\nname: tv-vibehack-skill\n')
         self.assertRejected()
 
     def test_bad_json_and_syntax_are_rejected(self):
@@ -141,7 +169,7 @@ class ReleaseToolTests(unittest.TestCase):
             (path / 'local.txt').write_text('Must not enter the source archive.')
         self.assertEqual(checker.check(self.root), [])
         with zipfile.ZipFile(io.BytesIO(builder.archive_bytes(self.root))) as archive:
-            self.assertEqual(set(archive.namelist()), {'tv-vibehack-safe/' + name for name in checker.DISTRIBUTION_FILES})
+            self.assertEqual(set(archive.namelist()), {'tv-vibehack-skill/' + name for name in checker.DISTRIBUTION_FILES})
 
     def test_archive_is_deterministic_despite_source_mtime_and_mode(self):
         first = builder.archive_bytes(self.root)
