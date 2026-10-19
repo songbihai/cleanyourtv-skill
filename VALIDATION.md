@@ -11,7 +11,9 @@ Package: TV Vibehack Skill 0.2.1 public prerelease.
 - Pinned the four reviewed PNG files by SHA-256. The publication checker still rejects undeclared files and changed assets, and now checks local HTML image references as well as Markdown links.
 - Ran all **93 offline tests** with Python 3.12.14 on macOS: passed. Ran the repository checker, synthetic demo, and skill frontmatter validator: passed.
 - Compared `scripts/plan_guard.py` and the device workflow references with the previous release: byte-identical. No device command or execution approval boundary changed.
-- Hosted validation for this update must be checked on its pull request and release commit before publication; the historical runs below cover 0.2.0.
+- [Validate run 39237849227](https://github.com/songbihai/tv-vibehack-skill/actions/runs/39237849227) passed all nine jobs for the reviewed update at `bccbc5d0cb6ddaf0cea921fa95279314fff2e3bc`. The suite contains 93 tests; the POSIX named-pipe case is intentionally skipped on Windows.
+- Read back all 38 uploaded paths and file bytes from the update branch: identical to the reviewed package. Verified GitHub renders all four images at the correct proportions and the download link points to the U.S. App Store.
+- This validation-record-only commit is checked by subsequent PR/main runs. The historical runs below cover 0.2.0.
 
 ## Historical 0.2.0 validation
 
