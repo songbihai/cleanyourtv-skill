@@ -2,7 +2,7 @@
 
 Date: 2026-10-19 (America/Los_Angeles).
 
-Package: TV Vibehack Safe 0.2.0 public prerelease candidate (not yet published).
+Package: TV Vibehack Safe 0.2.0 public prerelease.
 
 Reviewed upstream commit: `b01bb945a0fc64e6dfbb544d8d2163a490c82c50`.
 
@@ -21,12 +21,20 @@ The synthetic demo and final archive checks are part of the local artifact pass.
 
 Development validation was offline except retrieving source, consulting primary documentation/release metadata, and installing temporary validation tooling. No device network was accessed.
 
-## Not performed / owner gates
+## Completed on GitHub
+
+- Created the public [songbihai/tv-vibehack-safe repository](https://github.com/songbihai/tv-vibehack-safe). Read back all 33 source paths and file bytes: identical to the reviewed local source at commit `529c20300ee58d955a1ac35269ed0a3070c5a67a`.
+- [Validate run 39234904676](https://github.com/songbihai/tv-vibehack-safe/actions/runs/39234904676) completed successfully in all nine jobs: Python 3.10, 3.12, and 3.14 on ubuntu-latest, macos-latest, and windows-latest. These are runner labels; they do not certify every OS version.
+- The Windows Python 3.14 job reported 87 tests, OK with one expected skip for the POSIX named-pipe regression. Do not interpret a platform-specific skip as an executed test.
+- Verified that private vulnerability reporting is enabled. GitHub secret scanning and push protection were enabled in the repository settings. No persistent credentials or repository secrets are used by the validation workflow.
+- Publication metadata changes are checked by subsequent Validate runs linked from the repository Actions tab. The source commit/run above identifies the tested code; it does not claim an exact later commit was tested before that run exists.
+
+## Not performed / remaining limits
 
 - No ADB connection, device discovery, package disabling, launcher install, settings change, reboot, or recovery on a real TV. No hardware/firmware compatibility certification or boot-persistence test.
 - No independent behavioral runs across Codex, Claude, Gemini, or other model/provider combinations. [docs/evaluation.md](docs/evaluation.md) is a protocol, not results.
 - No production APK build/signing validation, model API calls, or paid evaluation.
-- No GitHub-hosted CI run. Python 3.10/3.14, Linux/Windows, and host-specific behavior remain pending until actually tested; YAML configuration is not proof of a successful matrix run.
-- No remote repository, private reporting channel, branch rules, tag, or public release was created. The owner must complete [docs/release.md](docs/release.md) before publishing a tagged prerelease.
+- No native skill installation or independent runtime behavioral evaluation in each assistant host. File/reference readability and format checks do not prove that a model will follow the workflow.
+- Repository protection settings and release assets are external state; inspect them on GitHub and follow [docs/release.md](docs/release.md) for future releases.
 
-Offline tests establish the helpers' tested behavior only. They do not establish semantic package safety, authenticity of supplied evidence, host enforcement, resistance to a hostile filesystem/device, or future model compliance. The project is ready for source review and scoped prerelease preparation; it is not hardware-certified stable software.
+Offline tests establish the helpers' tested behavior only. They do not establish semantic package safety, authenticity of supplied evidence, host enforcement, resistance to a hostile filesystem/device, or future model compliance. This is a scoped public prerelease; it is not hardware-certified stable software.

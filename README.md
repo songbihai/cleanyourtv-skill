@@ -2,7 +2,7 @@
 
 A model-independent Agent Skill for cautious Android TV and Google TV customization, based on [Gathin23/tv-vibehack](https://github.com/Gathin23/tv-vibehack). It adds evidence-based package review, hardware identity checks, explicit target selection, small transactions, and recovery instructions. All project text is in English.
 
-**Version 0.2.0: public prerelease candidate.** Offline tests do not establish hardware compatibility. No TV was changed during development. This project does not promise that disabling a package is safe on every firmware.
+**Version 0.2.0: public prerelease.** Offline tests do not establish hardware compatibility. No TV was changed during development. This project does not promise that disabling a package is safe on every firmware.
 
 ## What is included
 
@@ -13,7 +13,7 @@ A model-independent Agent Skill for cautious Android TV and Google TV customizat
 
 ## Quick start
 
-1. Download a reviewed revision of this repository. Do not run device commands from an unreviewed branch.
+1. Download the source or checked ZIP from the [v0.2.0 prerelease](https://github.com/songbihai/tv-vibehack-safe/releases/tag/v0.2.0). For the custom ZIP, verify the adjacent SHA-256 file before extraction. Do not run device commands from an unreviewed branch.
 2. Open [SKILL.md](SKILL.md) in your assistant, or install this entire folder as a skill using your host's documented method. Preserve `references/` and `scripts/` beside it.
 3. Ask: `Use tv-vibehack-safe to audit my Android TV. Start in plan mode. Do not change the device. I will provide its exact ADB endpoint.`
 4. For a real operation, follow the snapshot and plan procedure in [plan-format.md](references/plan-format.md), review its output, and approve the exact change before execution.
@@ -54,7 +54,7 @@ The guard checks structured claims; it cannot discover hidden OEM dependencies o
 
 ## Project status and publishing
 
-See [upstream-review.md](references/upstream-review.md) for provenance, [evaluation.md](docs/evaluation.md) for behavioral cases, [release.md](docs/release.md) for release gates, and [VALIDATION.md](VALIDATION.md) for the actual validation record. Local source can be uploaded for review; a public tagged prerelease still requires the hosting checks in the release checklist. CI is configured but must run successfully on GitHub before a tagged release. Do not describe this as hardware-certified or universally safe.
+See [upstream-review.md](references/upstream-review.md) for provenance, [evaluation.md](docs/evaluation.md) for behavioral cases, [release.md](docs/release.md) for release gates, and [VALIDATION.md](VALIDATION.md) for the actual validation record. The [nine-environment validation run](https://github.com/songbihai/tv-vibehack-safe/actions/runs/39234904676) passed on the uploaded source. Hardware behavior and independent model/host behavior remain unverified; see the validation record for exact scope. Future releases must satisfy the release checklist. Do not describe this as hardware-certified or universally safe.
 
 To build a review archive containing only declared source files, run `python3 scripts/build_release.py --output /path/outside/repository/tv-vibehack-safe-0.2.0.zip`. It refuses existing output and writes a `.sha256` sidecar. The [audit report](docs/audit.md) records this review and its limits.
 
