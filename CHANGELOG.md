@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1 — 2026-10-19 (prerelease)
+
+- Name the repository, skill entrypoint, host metadata, and archive root `tv-vibehack-skill`.
+- Add the maintainer’s optional TVRemoteX app, its icon, the first three current English screenshots from the App Store Connect workflow, and the U.S. App Store link to the README.
+- Keep promotional images under separate terms and pin their exact bytes in the publication manifest. Reject changed or undeclared assets and broken local HTML image references.
+- Preserve the existing device safety gates and offline plan behavior.
+
 ## 0.2.0 — 2026-10-19 (prerelease)
 
 - Require schema 2 with a stable hardware serial and property source; schema 1 is rejected.

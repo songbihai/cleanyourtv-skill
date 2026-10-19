@@ -1,4 +1,4 @@
-TV Vibehack Safe
+TV Vibehack Skill
 
 Independent instructions and offline helpers, 2026.
 
@@ -10,3 +10,6 @@ Upstream license: MIT (notice included in LICENSE).
 
 No endorsement by the upstream author, Google, Android, or any model provider is implied.
 No upstream font, image, APK, or source-code asset is distributed in this package.
+
+The TVRemoteX promotional images have separate terms in assets/tvremotex/NOTICE.md.
+Their inclusion does not make the app a requirement of this skill.
