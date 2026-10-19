@@ -72,7 +72,7 @@ The guard checks structured claims; it cannot discover hidden OEM dependencies o
 
 TVRemoteX brings everyday TV controls to your iPhone and iPad: navigate with a touchpad, type with your phone’s keyboard, adjust volume, and launch apps on compatible TVs.
 
-[View TVRemoteX on the U.S. App Store](https://apps.apple.com/us/app/tvremotex-universal-tv-remote/id6755671893)
+[View TVRemoteX on the App Store](https://apps.apple.com/us/app/tvremotex-universal-tv-remote/id6755671893)
 
 <p>
   <img src="assets/tvremotex/01-brands-en-US.png" alt="TVRemoteX English screenshot 1: TV brands" width="31%">
