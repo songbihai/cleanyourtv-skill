@@ -201,6 +201,35 @@ class ReleaseToolTests(unittest.TestCase):
                     self.assertTrue(any('LG source provenance' in e for e in self.assertRejected()))
                     path.write_text(original, encoding='utf-8')
 
+    def test_tizen_revision_drift_blocks_publication(self):
+        for name in ('NOTICE', 'references/tizen-source-review.md'):
+            for revision in checker.TIZEN_SOURCE_PINS.values():
+                with self.subTest(name=name, revision=revision):
+                    path = self.root / name
+                    original = path.read_text(encoding='utf-8')
+                    path.write_text(original.replace(revision, '3' * 40), encoding='utf-8')
+                    self.assertTrue(any('Tizen source provenance' in e for e in self.assertRejected()))
+                    path.write_text(original, encoding='utf-8')
+
+    def test_tizen_source_url_drift_blocks_publication(self):
+        for name in ('NOTICE', 'references/tizen-source-review.md'):
+            for url in checker.TIZEN_SOURCE_PINS:
+                with self.subTest(name=name, url=url):
+                    path = self.root / name
+                    original = path.read_text(encoding='utf-8')
+                    path.write_text(original.replace(url, 'https://example.invalid/unreviewed'), encoding='utf-8')
+                    self.assertTrue(any('Tizen source provenance' in e for e in self.assertRejected()))
+                    path.write_text(original, encoding='utf-8')
+
+    def test_wgt_inspector_cannot_add_network_execution_or_extraction(self):
+        path = self.root / 'scripts/inspect_wgt.py'
+        original = path.read_text(encoding='utf-8')
+        for addition in ('import subprocess', 'import socket', 'archive.extractall("unreviewed")', 'eval("unreviewed")'):
+            with self.subTest(addition=addition):
+                path.write_text(original + '\n' + addition + '\n', encoding='utf-8')
+                self.assertTrue(any('WGT inspector' in e for e in self.assertRejected()))
+        path.write_text(original, encoding='utf-8')
+
     def test_real_evidence_cannot_replace_synthetic_example(self):
         path = self.root / 'examples/snapshot.synthetic.json'
         data = json.loads(path.read_text())
