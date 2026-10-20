@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Add an optional Simplified Chinese tutorial covering setup, copyable requests, reviewed execution, launcher features, and recovery; link it from the English README.
+- Allow localized prose only in the declared tutorial file, keeping the core skill English and all existing publication checks active.
+
 ## 0.3.0 — 2026-10-19 (prerelease)
 
 - Rename the repository, skill, host metadata, and archive root to `cleanyourtv-skill`, following the upstream project rename.

@@ -13,6 +13,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 UPSTREAM_URL = 'https://github.com/Gathin23/cleanyourtv'
 UPSTREAM_REVISION = '7c61d3c57e561323b85d7096ee2b686685b9b499'
+# Only explicitly declared localized documentation may contain non-English prose.
+LOCALIZED_DOCUMENTS = frozenset({'docs/guide.zh-CN.md'})
 # Only these reviewed promotional bytes may bypass UTF-8 source checks.
 PINNED_ASSETS = {
     'assets/tvremotex/logo.png': 'edbcc77cc85d68ce09781c0b863321b96409ebf39726513afc14ad041541ecee',
@@ -28,7 +30,7 @@ DISTRIBUTION_FILES = tuple(sorted((
     '.github/ISSUE_TEMPLATE/bug_report.md', '.github/pull_request_template.md',
     'references/device-workflow.md', 'references/launcher.md', 'references/recovery.md',
     'references/plan-format.md', 'references/upstream-review.md', 'references/network-extras.md', 'docs/evaluation.md',
-    'docs/release.md', 'docs/compatibility.md', 'docs/audit.md', 'scripts/plan_guard.py',
+    'docs/release.md', 'docs/compatibility.md', 'docs/guide.zh-CN.md', 'docs/audit.md', 'scripts/plan_guard.py',
     'scripts/check_repository.py', 'scripts/build_release.py', 'tests/test_plan_guard.py',
     'tests/test_release_tools.py', 'examples/snapshot.synthetic.json', 'examples/plan.synthetic.json',
     'assets/tvremotex/NOTICE.md',
@@ -114,7 +116,7 @@ def check(root=ROOT):
                 if SECRET_RE.search(content):
                     # Do not print matching bytes or private data.
                     errors.append(f'Recognizable credential pattern in: {rel}')
-                if re.search(r'[\u3400-\u9fff]', content):
+                if rel not in LOCALIZED_DOCUMENTS and re.search(r'[\u3400-\u9fff]', content):
                     errors.append(f'Unexpected CJK prose in English-only source: {rel}')
                 if path.suffix == '.json':
                     json.loads(content, object_pairs_hook=_unique_object, parse_constant=_bad_constant)

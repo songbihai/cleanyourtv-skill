@@ -1,5 +1,7 @@
 # CleanYourTV Skill
 
+**[Chinese tutorial](docs/guide.zh-CN.md)** · Installation, copyable prompts, device review, launcher setup, and recovery.
+
 **Make Android TV cleanup easier and safer with your AI assistant.**
 
 Use your AI assistant to review unwanted preinstalled apps and set up a simpler home screen with your favorite apps. CleanYourTV Skill adapts [Gathin23/cleanyourtv](https://github.com/Gathin23/cleanyourtv) into a reusable workflow for Android TV and Google TV: inspect your TV, review a cleanup plan, and apply only the changes you approve.
@@ -95,7 +97,7 @@ Made by the maintainer of this skill. TVRemoteX is optional; the skill works ind
 
 ## Project status and publishing
 
-**Version 0.3.0.** Synced to the reviewed [cleanyourtv source revision](https://github.com/Gathin23/cleanyourtv/tree/7c61d3c57e561323b85d7096ee2b686685b9b499), whose launcher is version 2.3. The offline helpers and packaging tools have a **95-test suite**. See [VALIDATION.md](VALIDATION.md) for completed checks and the [Actions tab](https://github.com/songbihai/cleanyourtv-skill/actions) for cross-platform CI results.
+**Version 0.3.0.** Synced to the reviewed [cleanyourtv source revision](https://github.com/Gathin23/cleanyourtv/tree/7c61d3c57e561323b85d7096ee2b686685b9b499), whose launcher is version 2.3. The offline helpers and packaging tools have a **97-test suite**. See [VALIDATION.md](VALIDATION.md) for completed checks and the [Actions tab](https://github.com/songbihai/cleanyourtv-skill/actions) for cross-platform CI results.
 
 The skill builds on the upstream TV customization workflow. Consult upstream’s [device examples](https://github.com/Gathin23/cleanyourtv/tree/main/examples) for model-specific reports, then match the model, OS, and firmware to your TV. Keep device changes within the supported scope above and review each plan before execution.
 
