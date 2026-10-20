@@ -18,6 +18,14 @@ LG_SOURCE_PINS = {
     'https://github.com/webosbrew/dev-manager-desktop': '5445d114d6167df38624edfea8b05b9f652657d7',
     'https://github.com/webosbrew/ares-cli-rs': 'ef1247bc5b2fc4cdc625b663eb7721e8242d80b6',
     'https://github.com/throwaway96/slopbro': '21023d56ca424607bb03d2939609cc658c655fc7',
+    'https://github.com/webosbrew/webos-homebrew-channel': '92fcf9fef7ce08dbeae3b0616df8d0c75c11f0b3',
+}
+TIZEN_SOURCE_PINS = {
+    'https://github.com/jellyfin/jellyfin-tizen': '31408c121e34e73c9f50c4e201c05e95140675df',
+    'https://github.com/OneLiberty/moonlight-chrome-tizen': 'c7f76c04e605a5854d059454500b8102c05659ec',
+    'https://github.com/reisxd/TizenBrew': 'd6a797b0b270d65adcbaab64c5c10e0f5fac49b5',
+    'https://github.com/reisxd/TizenBrewInstaller': '579e2d2a7826709a5f9bea93bdeacbcea21a607b',
+    'https://github.com/chris-ritsen/samsung-tv-root': '4ad2c4d3b0d0e0da4b5b7ebe4a787e94596f416b',
 }
 # Only explicitly declared localized documentation may contain non-English prose.
 LOCALIZED_DOCUMENTS = frozenset({'README.zh-CN.md', 'docs/guide.zh-CN.md'})
@@ -37,6 +45,8 @@ DISTRIBUTION_FILES = tuple(sorted((
     'agents/openai.yaml', '.github/workflows/validate.yml', '.github/dependabot.yml',
     '.github/ISSUE_TEMPLATE/bug_report.md', '.github/pull_request_template.md',
     'references/device-workflow.md', 'references/launcher.md', 'references/recovery.md',
+    'references/tizen.md', 'references/tizen-source-review.md', 'references/tizen-root-research.md',
+    'scripts/inspect_wgt.py', 'tests/test_inspect_wgt.py',
     'references/webos.md', 'references/slopbro-research.md', 'references/lg-source-review.md',
     'references/plan-format.md', 'references/upstream-review.md', 'references/network-extras.md', 'docs/evaluation.md',
     'docs/release.md', 'docs/compatibility.md', 'docs/guide.zh-CN.md', 'docs/audit.md', 'scripts/plan_guard.py',
@@ -173,6 +183,10 @@ def check(root=ROOT):
         for url, revision in LG_SOURCE_PINS.items():
             if url not in content_by_name.get(name, '') or revision not in content_by_name.get(name, ''):
                 errors.append(f'LG source provenance differs from the reviewed source pins: {name}')
+    for name in ('NOTICE', 'references/tizen-source-review.md'):
+        for url, revision in TIZEN_SOURCE_PINS.items():
+            if url not in content_by_name.get(name, '') or revision not in content_by_name.get(name, ''):
+                errors.append(f'Tizen source provenance differs from the reviewed source pins: {name}')
     if len(skill.splitlines()) > 250:
         errors.append('Entrypoint exceeds the project context budget of 250 lines')
     source = content_by_name.get('scripts/plan_guard.py')
@@ -197,6 +211,27 @@ def check(root=ROOT):
                             errors.append('Plan guard added an unreviewed OS operation')
         except SyntaxError:
             errors.append('Plan guard is not valid Python')
+    inspector = content_by_name.get('scripts/inspect_wgt.py')
+    if inspector:
+        try:
+            tree = ast.parse(inspector)
+            permitted = {'argparse', 'hashlib', 'io', 'json', 'os', 'pathlib', 're', 'stat', 'struct', 'sys', 'unicodedata', 'xml', 'zipfile', 'zlib'}
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Import):
+                    names = [item.name.split('.')[0] for item in node.names]
+                elif isinstance(node, ast.ImportFrom):
+                    names = [(node.module or '').split('.')[0]]
+                else:
+                    names = []
+                if any(name not in permitted for name in names):
+                    errors.append('WGT inspector added an unreviewed runtime dependency')
+                if isinstance(node, ast.Call):
+                    if isinstance(node.func, ast.Name) and node.func.id in ('eval', 'exec', '__import__'):
+                        errors.append('WGT inspector must not evaluate dynamic code')
+                    if isinstance(node.func, ast.Attribute) and node.func.attr in ('extract', 'extractall', 'write', 'writestr', 'write_text', 'write_bytes', 'system', 'popen'):
+                        errors.append('WGT inspector must not extract, write or execute payloads')
+        except SyntaxError:
+            errors.append('WGT inspector is not valid Python')
     for name in ('examples/snapshot.synthetic.json', 'examples/plan.synthetic.json'):
         try:
             example = json.loads(content_by_name.get(name, '{}'))
