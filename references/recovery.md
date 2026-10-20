@@ -1,6 +1,6 @@
 # Recover from an interrupted or unhealthy session
 
-For LG webOS, use the recovery section in [webos.md](webos.md); the ADB/package steps below are Android-only. SlopBro research performs no device changes and supplies no root rollback.
+For LG webOS, use the recovery section in [webos.md](webos.md); the ADB/package steps below are Android-only. For Samsung Tizen apps, use [tizen.md](tizen.md). For explicitly enabled LG Root, use [slopbro-research.md](slopbro-research.md): Root is not an Android package transaction and uninstalling Homebrew does not establish an unroot inverse.
 
 Stop forward work at the first failed health check. Use the saved local journal and confirmed identity, not a remembered upstream example list. Never broadcast a restore to all ADB devices. If the original plan explicitly included automatic rollback on a failed check, its scoped inverse is authorized; otherwise obtain authorization for the concrete recovery action. Host permissions still apply.
 

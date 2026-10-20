@@ -10,7 +10,7 @@
 
 适用于你拥有或获准管理的 **Android TV / Google TV**。可以先做只读审查；实际修改要求确认硬件身份、当前为未受管理的设备所有者用户 0，并有可用的现场恢复方式。安装或更新桌面还要求确认设备只有一个用户。
 
-LG webOS 使用下方「LG 电视怎么用」的独立流程，不使用 Android 清理命令或桌面。Samsung Tizen、LG NetCast、Fire OS，以及受单位管理或处于其他用户会话的 Android 设备，不使用本教程的修改流程。不要仅凭电视品牌判断系统；同一品牌可能使用不同系统和固件。
+LG webOS 使用下方「LG 电视怎么用」的独立流程，不使用 Android 清理命令或桌面。三星 Tizen 使用下方独立的应用流程；Samsung Orsay、LG NetCast、Fire OS，以及受单位管理或处于其他用户会话的 Android 设备，不使用本教程的修改流程。不要仅凭电视品牌判断系统；同一品牌可能使用不同系统和固件。
 
 本 Skill 会保留原有桌面、所有 Home 候选程序、设置向导、系统更新、网络、输入与遥控、键盘、DRM 等关键功能。用途不明或依赖不清楚的应用保持原状。它不会为了更换桌面而停用系统桌面或设置向导。
 
@@ -158,7 +158,7 @@ LG webOS 使用下方「LG 电视怎么用」的独立流程，不使用 Android
 
 官方开发模式需要 LG 账号，启用会重启，禁用或会话到期可能移除开发安装的应用。不要把关闭开发模式或清除全体应用缓存当作恢复；已经 Root 或状态不明时不切换官方开发模式。只测试你自己的、经过审阅且不要求提权的单个应用，不批量安装 Homebrew，不替换系统 Home，也不安装 Android 的 cleanyourtv 桌面。
 
-你选择的 SlopBro / Root 模块与日常流程分开，必须明确启用：
+SlopBro / LG Root 模块与日常流程分开。只研究时可以这样明确启用：
 
 ```text
 请明确启用 cleanyourtv-skill 的 SlopBro / Root 研究模式。
@@ -167,11 +167,51 @@ LG webOS 使用下方「LG 电视怎么用」的独立流程，不使用 Android
 只生成研究报告，不连接电视、不启动服务、不打开载荷页面、不执行漏洞。
 ```
 
-这个模式支持源码分析和准备度报告，不执行 Root；上游的 payload 测试服务仍包含真实漏洞资源，不能作为无害连通性测试。详细边界见 [LG 流程](../references/webos.md)、[来源审查](../references/lg-source-review.md)和 [SlopBro 研究](../references/slopbro-research.md)。Android 离线计划检查器不会验证这些 LG 操作。
+只研究的请求仍不执行 Root。现在也支持明确提出 LG Root 需求后，先审查具体设备计划，再按独立门槛执行一次有时限的尝试：
 
-## 8. 出现问题时怎么处理
+```text
+请明确启用 cleanyourtv-skill 的 SlopBro LG Root 流程。
+先核对我的准确型号、完整固件、实体身份、固定源码与 Homebrew 依赖，
+说明官方开发模式冲突、隔离网络、配对密钥、Telnet / SSH / 启动改动和恢复限制。
+先给具体计划；满足该设备的审批与客户端要求后才能运行，不自动重试或重启。
+```
 
-告诉助手发生了什么，要求它读取对应恢复流程（[Android](../references/recovery.md) / [LG webOS](../references/webos.md)），使用本次会话保存的原始状态与操作记录。可以复制：
+SlopBro 会设置 Homebrew 和持久化，Homebrew 的正常及故障启动路径可能开启无认证 Telnet；SSH 也有配置密钥前的默认密码风险。必须先具备隔离网络和实体恢复条件，解决访问与启动状态后才考虑重启或接回日常网络。脚本完成、载荷已请求、Root 成功和持久化验证是不同结果；超时不能撤销电视端已开始的工作。不要用卸载 Homebrew 代表完整还原。
+
+上游的 payload 测试服务仍包含真实漏洞资源，不能作为无害连通性测试。详细边界见 [LG 流程](../references/webos.md)、[来源审查](../references/lg-source-review.md)和 [SlopBro 研究](../references/slopbro-research.md)。Android 离线计划检查器不会验证这些 LG 操作。
+
+## 8. 三星 Tizen：安装真正有用的应用
+
+三星流程重点是安装和配置应用，不止连接遥控：**Jellyfin** 接入你自己的媒体库；**Moonlight** 串流你自己的电脑游戏；也可以构建、签名和测试自己的 Web 应用。
+
+```text
+请使用 cleanyourtv-skill，用中文协助我的三星 Tizen 电视。
+型号 / 完整固件：[信息]；目标：[自己的 Jellyfin 媒体库 / 自己的电脑游戏串流]。
+我在电视旁，可以操作实体遥控器并核对 DUID。
+请读取 tizen.md，选择对应的固定源码和工具，
+先在本地构建与审查最终 WGT，说明签名、权限、应用 ID、更新数据风险和恢复。
+先给准确安装计划，不修改开发模式、不签入账号、不安装或重启电视。
+```
+
+实际安装使用官方 Tizen Studio、TV 扩展与证书工具。**Host PC IP 是电脑地址，不是电视地址**；激活开发模式、允许安装、证书与重启是独立影响。三星账号由你在受支持的证书管理器中私密登录，不交给第三方一键安装服务；保留作者证书供以后更新。
+
+离线检查最终 WGT：
+
+```text
+python3 scripts/inspect_wgt.py --wgt /private/session/reviewed.wgt
+```
+
+它只读取包数据，输出 SHA-256、应用 ID、包 ID、权限、服务与签名文件名，不解压、不安装、不执行，也不证明签名有效。路径换成你自己的私密文件；报告不要上传公开 Issue。电视命令必须指定同一准确目标；三星的 `run` / `uninstall` 使用 **application ID**，不能因选项叫 `pkgid` 就误用 package ID。
+
+Jellyfin 要选择与服务器相匹配的 Web 版本，不把包装项目的占位版本当作客户端版本。Moonlight 要核对具体固件、编解码器和手柄，使用已有的授权主机并自己确认配对 PIN；不自动开放路由器端口。更新旧应用可能丢失配对和数据，不能照搬“删了重装”。
+
+TizenBrew 是独立可选路线，模块会动态下载代码，还涉及 localhost 开发连接。要在首次启动前审查准确模块、服务和自动启动状态，不能只凭 WGT 哈希就放行。审查到的 TizenBrew Installer 会关闭 TLS 验证并处理账号和证书材料，本流程不执行这个未修改的安装器。
+
+你允许 Root 后，三星也可以单独做[准确固件的 Root 研究](../references/tizen-root-research.md)，但当前找到的路线仍是实验性、有限型号证据，不能包装成适用于所有三星的稳定功能。**SlopBro 只用于 LG webOS，不用于三星。** 三星应用安装无需 Root，不能因为安装失败就自动尝试漏洞、系统精简或禁用安全机制。
+
+## 9. 出现问题时怎么处理
+
+告诉助手发生了什么，要求它读取对应恢复流程（[Android](../references/recovery.md) / [LG webOS](../references/webos.md) / [三星应用](../references/tizen.md) / [LG Root](../references/slopbro-research.md)），使用本次会话保存的原始状态与操作记录。可以复制：
 
 ```text
 请停止所有后续变更。刚才出现的问题是：[具体表现]。
@@ -185,7 +225,7 @@ LG webOS 使用下方「LG 电视怎么用」的独立流程，不使用 Android
 
 结束前，让助手汇总本次修改、跳过项、恢复结果，以及留在本地的记录位置。记录应在技能仓库之外的私密目录；保留好恢复资料，待检查与恢复完成后关闭不再需要的调试并撤销临时配对。
 
-## 9. 没有电视，也可以先熟悉流程
+## 10. 没有电视，也可以先熟悉流程
 
 在解压后的**技能根目录**使用 Python 3.10 或更新版本运行：
 
@@ -197,7 +237,7 @@ python3 scripts/plan_guard.py --snapshot examples/snapshot.synthetic.json --plan
 
 应用计划检查器只校验其支持的应用计划格式；通过检查不等于允许执行，也不代表它已检查桌面安装、主题、权限或 DNS 操作。
 
-## 10. 常见问题
+## 11. 常见问题
 
 **教程是中文，Skill 是英文，会影响使用吗？**
 

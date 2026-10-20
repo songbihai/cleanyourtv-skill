@@ -10,7 +10,7 @@ Use this reference only after identifying the TV as LG webOS. LG NetCast is a di
 | Volume, mute, navigation, playback, launch an installed app, select HDMI | Existing Home Assistant entity; aiowebostv if no integration is available | One exact target and requested action; no generic service/URI pass-through. |
 | Install and test the user's own web app | webOS Dev Manager, or LG's current webOS CLI | Official Developer Mode, non-root `prisoner` connection; inspect the exact IPK first. |
 | Remove unwanted ordinary apps | Explain the TV's normal app-management UI | A separate, exact app-removal request; explain data loss. No system-app removal or bulk cleanup. |
-| Root, Homebrew elevation, startup persistence or exploit compatibility | [SlopBro research](slopbro-research.md), only when explicitly requested | Source analysis and readiness report only; no payload execution. |
+| Root, Homebrew elevation, startup persistence or exploit compatibility | [SlopBro / LG Root](slopbro-research.md), only when explicitly requested | Research stays source-only; Root execution requires its separate complete owned-device gate. |
 
 Reuse an existing working integration rather than installing a second controller. A tool installation changes the host: first show its source, version, dependency/download effects and storage locations, and use the host's approved installation method. Never install a package just to inspect an existing plan. A Python client needs Python 3.11+ and aiohttp; the skill's own offline helpers remain Python 3.10+, standard library only. Use an isolated environment, not the host's system Python. Do not auto-upgrade Home Assistant's managed dependencies.
 

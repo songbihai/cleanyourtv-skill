@@ -1,6 +1,6 @@
 # Host compatibility and practical use
 
-This is one Agent Skill with platform-specific Android and LG webOS workflows. A model name does not determine what a host can execute. Native discovery, file/reference access, shell argument handling, timeouts, image inspection, and human approval are separate capabilities. Never infer consent to administer a TV from consent to install or activate a skill.
+This is one Agent Skill with platform-specific Android, LG webOS and Samsung Tizen workflows. A model name does not determine what a host can execute. Native discovery, file/reference access, shell argument handling, timeouts, image inspection, and human approval are separate capabilities. Never infer consent to administer a TV from consent to install or activate a skill.
 
 ## Install the complete folder
 
@@ -34,7 +34,11 @@ Resolve the skill root from the loaded SKILL.md location. Do not assume the proc
 
 Android uses ADB and, for launcher builds, its reviewed Android toolchain. LG uses an existing Home Assistant LG integration, an optional reviewed aiowebostv client, or Dev Manager / LG's current webOS CLI for official developer apps. These clients are separate software, not bundled dependencies of the skill. Installation, pairing and credential storage need the concrete host/device scope. A file-only assistant can prepare either platform's plan without installing them. Read [webos.md](../references/webos.md) before any LG connection; do not fake Android JSON fields or run the Android guard for LG.
 
-SlopBro / Root research requires only source/document access and the explicit research request. It never needs device connectivity, a payload server or elevated host permissions. No model-specific tool API or automatic approval exemption is part of the skill.
+Research-only SlopBro requests require source/document access and never connect to a TV. No model-specific tool API or automatic approval exemption is part of the skill.
+
+Samsung Tizen uses official Tizen Studio/TV/certificate tools for reviewed WGT builds and installs. Jellyfin additionally needs a separately selected/pinned Web release and supported Node build environment; Moonlight builds need their documented WASM toolchain. The original offline WGT inspector needs only Python 3.10+ and no third-party modules. It reports data, not install approval or signature validation. File-only models can read the report and prepare a plan.
+
+LG SlopBro research can stay source-only; actual Root requires its explicit device/firmware, source/dependency, isolation, approval and recovery gate. The skill's own helpers never run a payload. Samsung Root is separate static research in this release. Host tool denials and action-time approval requirements remain effective.
 
 ## Copyable starting requests
 
@@ -68,6 +72,12 @@ LG developer app:
 Use cleanyourtv-skill to review my own LG webOS IPK and plan installation using official Developer Mode and Dev Manager. Check source/hash, app ID conflicts, developer-session effects, root conflicts and recovery limits. Do not install, reboot or change the TV until I approve the exact plan.
 ```
 
-For explicitly requested source research, use the [SlopBro request](../references/slopbro-research.md); LG audit/control requests do not enable it.
+Samsung useful apps:
+
+```text
+Use cleanyourtv-skill for my authorized Samsung Tizen TV. I want Jellyfin for my existing media server or Moonlight for my own PC, not just remote control. Review my exact TV/firmware, source versions, signed WGT, privileges, application IDs and recovery limits. Build/review locally first; show one target-specific install plan before any TV write.
+```
+
+For explicitly requested LG Root or source research, use the [SlopBro request](../references/slopbro-research.md); ordinary LG tasks do not enable it. Samsung Root uses the separate [Tizen research reference](../references/tizen-root-research.md), never SlopBro.
 
 Run [the behavioral cases](evaluation.md) using mocked tools before claiming a model/host pairing was evaluated. Record exact versions and actual observations. Do not grant an assistant broad permissions merely to make an evaluation pass.

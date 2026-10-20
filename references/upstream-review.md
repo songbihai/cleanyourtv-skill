@@ -4,7 +4,7 @@ Upstream: https://github.com/Gathin23/cleanyourtv (formerly tv-vibehack).
 Reviewed revision: `7c61d3c57e561323b85d7096ee2b686685b9b499`.
 Review date: 2026-10-19 (America/Los_Angeles).
 
-This is the upstream main-branch revision retrieved for this release; upstream has no version tags at this revision. Its launcher declares version 2.3, version code 4, package `com.gathin.tvhome`, minimum SDK 26, compile/target SDK 34, and Java 17. This Android baseline was adopted in skill 0.3.0 and remains pinned in 0.4.0; LG source reviews are separate. The previous review used `b01bb945a0fc64e6dfbb544d8d2163a490c82c50`.
+This is the upstream main-branch revision retrieved for this release; upstream has no version tags at this revision. Its launcher declares version 2.3, version code 4, package `com.gathin.tvhome`, minimum SDK 26, compile/target SDK 34, and Java 17. This Android baseline was adopted in skill 0.3.0 and remains pinned in 0.5.0; LG and Tizen source reviews are separate. The previous review used `b01bb945a0fc64e6dfbb544d8d2163a490c82c50`.
 
 Review the [pinned source tree](https://github.com/Gathin23/cleanyourtv/tree/7c61d3c57e561323b85d7096ee2b686685b9b499), not a moving branch, before building or executing anything. No upstream source, APK, fonts, images, ADB keys, device lists, or dependency binaries are bundled here. This package supplies independent instructions and offline helpers, with upstream attribution in NOTICE and LICENSE.
 

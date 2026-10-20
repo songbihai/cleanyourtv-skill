@@ -2,7 +2,22 @@
 
 Date: 2026-10-20 (America/Los_Angeles).
 
-Package: CleanYourTV Skill 0.4.0 public prerelease.
+Package: CleanYourTV Skill 0.5.0 public prerelease.
+
+## 0.5.0 Samsung apps and explicit LG Root
+
+- Added practical Tizen app workflows: Jellyfin media-library and Moonlight PC-streaming builds/installation/testing, private TV signing, final-WGT review, exact serial/application-ID use, bounded install reconciliation and update/removal data limits. TizenBrew is opt-in with dynamic-module review; its reviewed unmodified installer is excluded from execution.
+- Reviewed and pinned Jellyfin Tizen, Moonlight v1.2.1, TizenBrew v2.0.5, TizenBrew Installer and the experimental Samsung Root project; source files, scope and exclusions are in [tizen-source-review.md](references/tizen-source-review.md). No full dependency graph, release binary, Samsung SDK or exploit payload was certified.
+- At the user's explicit request, expanded LG SlopBro from research-only to a separately gated owned-device Root workflow. Research-only requests still do not connect, serve or execute. Real Root requires exact firmware/identity, reviewed source/assets and dependency, isolated trusted network, concrete approvals, bounded attempt and honest recovery/access/startup limits.
+- Separately reviewed Homebrew Channel v0.7.3 source (`92fcf9fef7ce08dbeae3b0616df8d0c75c11f0b3`), including elevation, Telnet/default-password and failsafe/startup behavior. Runtime exposure must be checked separately from settings flags; host cancellation does not undo TV-side payload work.
+- Added an original standard-library WGT inspector with 23 synthetic tests covering report/hash/identity, signature-filename semantics, remote-entry warnings, services, ZIP paths/collisions/symlinks/encryption/compression/resource limits, DTD/encoding/namespaces, malformed deflate, special local files and CLI failure/success behavior. The helper never extracts, signs, verifies cryptographic signatures, runs code or contacts a TV.
+- Ran all **126 offline tests** with Python 3.12.14 on macOS: passed. Repository integrity, synthetic Android demo, skill frontmatter and whitespace checks passed. Existing Android guard code remains byte-identical; its unsupported-platform test still rejects Tizen/webOS. Added source-pin and inspector-dependency/extraction regressions.
+- The first hosted matrix exposed Windows ZIP-writer normalization in the hostile-backslash test fixture. Corrected the fixture to preserve raw hostile names in ZIP headers on every host; the inspector's path-rejection rule was unchanged. Hosted results for the corrected head are linked in the release PR.
+- Inspected Jellyfin, Moonlight and TizenBrew source manifests inside temporary synthetic ZIPs with stub entry points: all three produced the expected IDs/service counts. These were manifest-only structural checks, not application builds, signed artifacts or compatibility tests. Temporary packages were not added to the release.
+- Current declared manifest: **49 files**. Approved PNG bytes and English-core/localization boundaries remain unchanged. Packaging is deterministic under the release-tool tests; private device evidence, keys, apps, SDKs and third-party code are excluded.
+- Added 19 Samsung/LG Root manual evaluation cases, updated the earlier Root case and both language guides. These are protocols, not independent model-run results. No TV was connected or changed, no signing credentials were created/used, and no SDK, third-party app/client, installer, container or root executable/payload was run. Hosted results are recorded in the release PR/Actions once complete.
+
+The following records describe their historical versions and scopes.
 
 ## 0.4.0 LG webOS extension
 

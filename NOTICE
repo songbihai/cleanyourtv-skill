@@ -26,3 +26,23 @@ No upstream font, image, APK, IPK, payload, pairing manifest, test key or source
 
 The TVRemoteX promotional images have separate terms in assets/tvremotex/NOTICE.md.
 Their inclusion does not make the app a requirement of this skill.
+
+Additional reviewed LG Root dependency (not redistributed):
+https://github.com/webosbrew/webos-homebrew-channel
+Reviewed v0.7.3: 92fcf9fef7ce08dbeae3b0616df8d0c75c11f0b3 (MIT)
+
+Samsung Tizen research and optional application references (not redistributed):
+https://github.com/jellyfin/jellyfin-tizen
+Reviewed: 31408c121e34e73c9f50c4e201c05e95140675df (MPL-2.0)
+https://github.com/OneLiberty/moonlight-chrome-tizen
+Reviewed v1.2.1: c7f76c04e605a5854d059454500b8102c05659ec (GPL-3.0 license text)
+https://github.com/reisxd/TizenBrew
+Reviewed v2.0.5: d6a797b0b270d65adcbaab64c5c10e0f5fac49b5 (GPL-3.0-only service declaration)
+https://github.com/reisxd/TizenBrewInstaller
+Reviewed: 579e2d2a7826709a5f9bea93bdeacbcea21a607b (GPL-3.0 license text)
+https://github.com/chris-ritsen/samsung-tv-root
+Reviewed: 4ad2c4d3b0d0e0da4b5b7ebe4a787e94596f416b (Unlicense; research only)
+Samsung official documentation is linked in references/tizen-source-review.md.
+The WGT inspector is original independent code; no source, binary, certificate,
+WGT/TPK, container image or exploit payload from these projects is included.
+No endorsement by Samsung or these projects is implied.

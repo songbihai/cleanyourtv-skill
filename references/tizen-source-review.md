@@ -1,0 +1,28 @@
+# Samsung Tizen source selection
+
+Review date: 2026-10-20 (America/Los_Angeles). Static primary-source review only; no SDK, app, installer, container, root tool or TV command was run. The selection emphasizes useful installed apps and reproducible builds rather than treating remote connectivity as the feature.
+
+| Source | Reviewed baseline | Role and license |
+| --- | --- | --- |
+| [jellyfin/jellyfin-tizen](https://github.com/jellyfin/jellyfin-tizen) | `31408c121e34e73c9f50c4e201c05e95140675df` | Official TV wrapper, MPL-2.0. Build with a separately selected/pinned Jellyfin Web release matching the user's server; the Web project has its own license and dependency review. |
+| [OneLiberty/moonlight-chrome-tizen](https://github.com/OneLiberty/moonlight-chrome-tizen) | v1.2.1 `c7f76c04e605a5854d059454500b8102c05659ec`; current-branch documentation `0119eaece01a1ae4a510da805b59d3d101f1b0ca` also inspected | Established community WASM game-streaming port, GPL-3.0 license text. The stable tag is old; do not infer current-firmware support or silently substitute automated/nightly builds. |
+| [reisxd/TizenBrew](https://github.com/reisxd/TizenBrew) | v2.0.5 `d6a797b0b270d65adcbaab64c5c10e0f5fac49b5` | Optional module host, GPL-3.0-only declared by its service package. Its localhost development bridge and downloaded modules need separate approval. |
+| [reisxd/TizenBrewInstaller](https://github.com/reisxd/TizenBrewInstaller) | `579e2d2a7826709a5f9bea93bdeacbcea21a607b` | Reviewed as an excluded default installer, GPL-3.0 license text. Convenience does not establish safe credential handling or authenticated downloads. |
+| [chris-ritsen/samsung-tv-root](https://github.com/chris-ritsen/samsung-tv-root) | `4ad2c4d3b0d0e0da4b5b7ebe4a787e94596f416b` | Experimental device-specific Root research, Unlicense. Reviewed README, source routing/preflight/lifecycle surfaces and license, not the complete payload chain. No Root execution route is certified by this inspection. |
+
+## Concrete findings
+
+- **Jellyfin:** source README/package/lockfile, config and Gulp build inspected. The npm postinstall runs Gulp, which rebuilds `www`; generated CSP permits broad origins/inline/eval and config uses wildcard access. An isolated build, trusted server and payload review remain necessary. Wrapper version `0.1.0` is not the bundled Web release. No compiler/dependency tree or third-party WGT binary was evaluated here.
+- **Moonlight:** README, Samsung build guide, config, Dockerfile, dependency layout and changelog inspected. The manifest minimum is 5.5 and uses Samsung WASM/socket features. The Dockerfile downloads toolchains, accepts an SDK license and creates a shared weak-password signing identity; it is not a safe credential template. README update instructions remove the prior app, while some install examples omit target selection. This skill supplies explicit target and informed update/data handling instead.
+- **TizenBrew:** config, service entry, module/configuration loaders and debugger inspected. The service binds to loopback at the reviewed release and uses local SDB/debugging. Default module selection is unversioned; the loader obtains metadata/code from jsDelivr and can execute module services/userscripts. Pinning the WGT does not pin downloaded code. The normal route stays on reviewed standalone apps; optional module work needs review before first launch and no implicit developer-host loopback change.
+- **Installer:** the service entry sets `NODE_TLS_REJECT_UNAUTHORIZED` to `0`, uses HTTP/WebSocket listeners without an explicit loopback bind, accepts account tokens for certificate creation, selects Partner privilege and stores certificates/password in a JSON configuration. GitHub assets come from `releases/latest`. These source findings justify excluding the unmodified installer from execution rather than calling it secure because it is popular. No assertion about exploitation or a complete security audit is made.
+- **Root:** the Samsung project reports exact QN90B/QN90F targets, SDB injection and several escalation routes, a volatile root agent and optional host-side reacquisition. An apparent preflight can use a command foothold; the label is not evidence of passive behavior. It is not SlopBro or universal Samsung Root. See [tizen-root-research.md](tizen-root-research.md).
+
+## Authoritative platform references
+
+- [Samsung TV device setup](https://developer.samsung.com/smarttv/develop/getting-started/using-sdk/tv-device.html): developer host address, reboot, target connection and app replacement behavior.
+- [Samsung certificate creation](https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/creating-certificates.html): TV DUID, author/distributor profiles, private key preservation and update signing identity.
+- [Samsung TV CLI](https://developer.samsung.com/smarttv/develop/getting-started/using-sdk/command-line-interface.html): WGT packaging, explicit serial/target, and the TV-specific requirement to use application ID for run/uninstall.
+- [Samsung installation FAQ](https://developer.samsung.com/smarttv/develop/faq/tizen-studio.html): supported TV/certificate extensions and explicit install permission.
+
+Official pages were checked on the review date. They are live documentation, not pinned implementation reviews. Use the installed supported tool's actual help and preserve host approvals. This MIT skill contains independent instructions and an original offline inspector, not client source, signing keys, WGT/TPK files, Samsung SDK binaries or exploit payloads. Optional projects keep their own licenses. Source notices are in [NOTICE](../NOTICE); procedures in [tizen.md](tizen.md).

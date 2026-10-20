@@ -1,4 +1,4 @@
 interface:
   display_name: "CleanYourTV Skill"
-  short_description: "Android cleanup and LG webOS control with review"
-  default_prompt: "Use $cleanyourtv-skill to identify my TV platform and prepare the appropriate Android or LG webOS plan before any device changes."
+  short_description: "Android, LG and Tizen apps with scoped change review"
+  default_prompt: "Use $cleanyourtv-skill to identify my TV platform and prepare the appropriate Android, LG webOS or Samsung Tizen plan before any device changes."
