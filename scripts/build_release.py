@@ -22,7 +22,7 @@ def archive_bytes(root=ROOT):
     with zipfile.ZipFile(result, 'w', compression=zipfile.ZIP_STORED) as archive:
         for name in DISTRIBUTION_FILES:
             # No filesystem modes, creation times, or local paths enter the ZIP.
-            info = zipfile.ZipInfo('tv-vibehack-skill/' + name, date_time=(2026, 1, 1, 0, 0, 0))
+            info = zipfile.ZipInfo('cleanyourtv-skill/' + name, date_time=(2026, 1, 1, 0, 0, 0))
             info.create_system = 3
             info.external_attr = 0o100644 << 16
             info.compress_type = zipfile.ZIP_STORED

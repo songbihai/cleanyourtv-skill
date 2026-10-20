@@ -11,6 +11,8 @@ import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+UPSTREAM_URL = 'https://github.com/Gathin23/cleanyourtv'
+UPSTREAM_REVISION = '7c61d3c57e561323b85d7096ee2b686685b9b499'
 # Only these reviewed promotional bytes may bypass UTF-8 source checks.
 PINNED_ASSETS = {
     'assets/tvremotex/logo.png': 'edbcc77cc85d68ce09781c0b863321b96409ebf39726513afc14ad041541ecee',
@@ -25,7 +27,7 @@ DISTRIBUTION_FILES = tuple(sorted((
     'agents/openai.yaml', '.github/workflows/validate.yml', '.github/dependabot.yml',
     '.github/ISSUE_TEMPLATE/bug_report.md', '.github/pull_request_template.md',
     'references/device-workflow.md', 'references/launcher.md', 'references/recovery.md',
-    'references/plan-format.md', 'references/upstream-review.md', 'docs/evaluation.md',
+    'references/plan-format.md', 'references/upstream-review.md', 'references/network-extras.md', 'docs/evaluation.md',
     'docs/release.md', 'docs/compatibility.md', 'docs/audit.md', 'scripts/plan_guard.py',
     'scripts/check_repository.py', 'scripts/build_release.py', 'tests/test_plan_guard.py',
     'tests/test_release_tools.py', 'examples/snapshot.synthetic.json', 'examples/plan.synthetic.json',
@@ -138,15 +140,21 @@ def check(root=ROOT):
         errors.append('SKILL.md needs complete YAML frontmatter')
     else:
         front = parts[1]
-        if not re.search(r'^name: tv-vibehack-skill$', front, re.MULTILINE):
+        if not re.search(r'^name: cleanyourtv-skill$', front, re.MULTILINE):
             errors.append('Invalid skill name')
         if not re.search(r'^description: .+', front, re.MULTILINE):
             errors.append('Skill description is missing')
+        if (f'  upstream: "{UPSTREAM_URL}"' not in front or
+                f'  upstream_revision: "{UPSTREAM_REVISION}"' not in front):
+            errors.append('Skill upstream identity differs from the reviewed source pin')
         version = content_by_name.get('VERSION', '').strip()
         if not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+', version):
             errors.append('VERSION must contain a semantic release version')
         elif f'  version: "{version}"' not in front or f'## {version} ' not in content_by_name.get('CHANGELOG.md', ''):
             errors.append('Version differs between VERSION, skill metadata, and changelog')
+    for name in ('NOTICE', 'references/upstream-review.md'):
+        if UPSTREAM_REVISION not in content_by_name.get(name, '') or UPSTREAM_URL not in content_by_name.get(name, ''):
+            errors.append(f'Upstream provenance differs from the reviewed source pin: {name}')
     if len(skill.splitlines()) > 250:
         errors.append('Entrypoint exceeds the project context budget of 250 lines')
     source = content_by_name.get('scripts/plan_guard.py')
