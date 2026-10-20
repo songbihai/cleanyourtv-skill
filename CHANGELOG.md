@@ -1,6 +1,12 @@
 # Changelog
 
-## Unreleased
+## 0.4.0 — 2026-10-20 (prerelease)
+
+- Add LG webOS normal control through an existing Home Assistant integration or reviewed aiowebostv client, and official non-root developer-app testing through Dev Manager / LG CLI.
+- Route by actual platform, with LG pairing/access approval, private credential storage, physical target binding, transport limits, bounded single actions and honest recovery limits. Keep Android package gates and the offline command generator unchanged.
+- Add an explicitly requested SlopBro / Root source-research module with pinned provenance and persistent-change/recovery assessment; it never executes a payload or roots a TV.
+- Review and pin aiowebostv v0.10.0, Dev Manager v1.99.20, its ares-cli-rs v0.6.0 dependency and SlopBro. Document SSAP/SSH server-authentication limits and official developer-session app-removal effects; do not vendor code or binaries.
+- Extend bilingual usage guidance, mocked behavioral cases and release provenance checks; fix the security policy's stale supported-version reference.
 
 - Add an optional Simplified Chinese tutorial covering setup, copyable requests, reviewed execution, launcher features, and recovery.
 - Provide complete English and Simplified Chinese READMEs with reciprocal native-language navigation and corresponding content; link the tutorial from Quick start.
