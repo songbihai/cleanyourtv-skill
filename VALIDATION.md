@@ -4,6 +4,12 @@ Date: 2026-10-19 (America/Los_Angeles).
 
 Package: CleanYourTV Skill 0.3.0 public prerelease.
 
+## Unreleased Chinese tutorial update
+
+- Added the optional Chinese tutorial and its declared distribution entry (40 files in the current source manifest). Core instructions and execution boundaries remain English and unchanged.
+- Restricted the localization exception to `docs/guide.zh-CN.md`. Regression coverage checks UTF-8 archive preservation, link validation inside the guide, and continued rejection of CJK prose in the core skill.
+- Ran all **97 offline tests** with Python 3.12.14 on macOS: passed. Repository integrity and whitespace checks also passed. Hosted results are linked in the pull request; historical release records below retain their original test counts and source scope.
+
 ## 0.3.0 upstream synchronization
 
 - Reviewed upstream main revision `7c61d3c57e561323b85d7096ee2b686685b9b499` against the previous pin. Upstream has no version tags at this revision; the launcher declares version 2.3 (code 4).
