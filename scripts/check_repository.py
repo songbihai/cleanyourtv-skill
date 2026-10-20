@@ -14,7 +14,9 @@ ROOT = Path(__file__).resolve().parents[1]
 UPSTREAM_URL = 'https://github.com/Gathin23/cleanyourtv'
 UPSTREAM_REVISION = '7c61d3c57e561323b85d7096ee2b686685b9b499'
 # Only explicitly declared localized documentation may contain non-English prose.
-LOCALIZED_DOCUMENTS = frozenset({'docs/guide.zh-CN.md'})
+LOCALIZED_DOCUMENTS = frozenset({'README.zh-CN.md', 'docs/guide.zh-CN.md'})
+# The English README permits only this standalone native-language navigation line.
+ENGLISH_LANGUAGE_NAVIGATION = '**English** | [\u7b80\u4f53\u4e2d\u6587](README.zh-CN.md)'
 # Only these reviewed promotional bytes may bypass UTF-8 source checks.
 PINNED_ASSETS = {
     'assets/tvremotex/logo.png': 'edbcc77cc85d68ce09781c0b863321b96409ebf39726513afc14ad041541ecee',
@@ -24,7 +26,7 @@ PINNED_ASSETS = {
 }
 # The release builder uses this exact manifest, never an arbitrary directory zip.
 DISTRIBUTION_FILES = tuple(sorted((
-    'SKILL.md', 'README.md', 'LICENSE', 'NOTICE', 'SECURITY.md', 'CONTRIBUTING.md',
+    'SKILL.md', 'README.md', 'README.zh-CN.md', 'LICENSE', 'NOTICE', 'SECURITY.md', 'CONTRIBUTING.md',
     'CHANGELOG.md', 'VALIDATION.md', 'VERSION', '.editorconfig', '.gitignore', '.gitattributes',
     'agents/openai.yaml', '.github/workflows/validate.yml', '.github/dependabot.yml',
     '.github/ISSUE_TEMPLATE/bug_report.md', '.github/pull_request_template.md',
@@ -116,7 +118,10 @@ def check(root=ROOT):
                 if SECRET_RE.search(content):
                     # Do not print matching bytes or private data.
                     errors.append(f'Recognizable credential pattern in: {rel}')
-                if rel not in LOCALIZED_DOCUMENTS and re.search(r'[\u3400-\u9fff]', content):
+                language_content = content
+                if rel == 'README.md':
+                    language_content = content.replace('\n' + ENGLISH_LANGUAGE_NAVIGATION + '\n', '\n', 1)
+                if rel not in LOCALIZED_DOCUMENTS and re.search(r'[\u3400-\u9fff]', language_content):
                     errors.append(f'Unexpected CJK prose in English-only source: {rel}')
                 if path.suffix == '.json':
                     json.loads(content, object_pairs_hook=_unique_object, parse_constant=_bad_constant)
