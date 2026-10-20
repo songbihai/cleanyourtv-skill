@@ -1,8 +1,16 @@
 # CleanYourTV Skill
 
-**A cleaner Android TV, guided by your AI assistant.**
+**Make Android TV cleanup easier and safer with your AI assistant.**
 
 Use your AI assistant to review unwanted preinstalled apps and set up a simpler home screen with your favorite apps. CleanYourTV Skill adapts [Gathin23/cleanyourtv](https://github.com/Gathin23/cleanyourtv) into a reusable workflow for Android TV and Google TV: inspect your TV, review a cleanup plan, and apply only the changes you approve.
+
+## Why use this skill?
+
+- **Easier to use.** Install one reusable skill and describe what you want. Your assistant follows the relevant audit, cleanup, launcher, or recovery procedure, with copyable requests and references available when needed.
+- **Safer execution by design.** The skill adds explicit device identity checks, a plan you approve before changes, protected-package rules, one-package transactions, and recorded recovery steps. Uncertain outcomes stop further changes instead of triggering blind retries.
+- **Portable across assistants.** Plain Markdown and standard-library helpers keep the workflow independent of any model provider. It adapts to the tools and permissions available in your assistant, including plan-only use without device access.
+
+These guardrails are designed to reduce wrong-device changes, unintended loss of TV functions, and mistakes from copying commands or package lists without checking the target TV. The original launcher and Setup Wizard stay enabled throughout this skill's workflow.
 
 ## What you can do
 
