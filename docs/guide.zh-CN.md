@@ -1,6 +1,6 @@
 # CleanYourTV Skill 中文使用教程
 
-[返回英文 README](../README.md) · [技能入口](../SKILL.md) · [版本下载](https://github.com/songbihai/cleanyourtv-skill/releases)
+[返回中文 README](../README.zh-CN.md) · [English](../README.md) · [技能入口](../SKILL.md) · [版本下载](https://github.com/songbihai/cleanyourtv-skill/releases)
 
 用自然语言告诉 AI 助手你的目标，让它帮你审查电视上的预装应用、整理清理方案，或配置更简洁的桌面。你先看清计划和恢复步骤，再决定是否执行。
 
