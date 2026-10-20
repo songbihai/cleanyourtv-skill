@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.0 — 2026-10-20 (prerelease)
+
+- Add useful Samsung Tizen app workflows: Jellyfin media libraries, Moonlight PC streaming, personal WGT builds, signing, single-target installation, testing and scoped removal/recovery. Keep Android and LG tooling separate.
+- Add an original offline standard-library WGT inspector with bounded ZIP/XML parsing, exact IDs/hash/privilege reporting and no extraction, signing, execution or network access.
+- Review TizenBrew dynamic modules and exclude the unmodified TizenBrew Installer from execution because of its TLS, account/listener and certificate-storage behavior. Keep experimental Samsung Root as explicit static research with exact upstream model/build evidence.
+- Expand the explicitly enabled LG SlopBro module from research-only to a gated owned-device Root workflow. Research requests remain source-only; actual execution requires a concrete target/firmware plan, dependency review, isolated network, approvals and bounded attempt with honest recovery limits.
+- Review Homebrew Channel v0.7.3 startup/elevation effects, including unauthenticated/default remote access, startup hooks, failsafe behavior and telemetry changes. Make pre-reboot access handling and persistence verification explicit.
+- Update English/Chinese documentation, manual behavioral cases, security scope, source pins and deterministic publication manifest; preserve Android command generation and approved promotional assets.
+
 ## 0.4.0 — 2026-10-20 (prerelease)
 
 - Add LG webOS normal control through an existing Home Assistant integration or reviewed aiowebostv client, and official non-root developer-app testing through Dev Manager / LG CLI.
