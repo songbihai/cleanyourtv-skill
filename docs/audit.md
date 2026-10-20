@@ -1,5 +1,13 @@
 # Safety, portability, and publication review
 
+## 0.5.0 Tizen apps and explicit LG Root review — 2026-10-20
+
+- Added Tizen outcomes beyond remote control: signed Jellyfin/Moonlight/personal WGT builds, final-artifact inspection, explicit serial and TV application-ID handling, one-install reconciliation and honest update/removal data limits.
+- Built an original offline WGT inspector; synthetic cases exercise ZIP/XML ambiguity, traversal, special inputs, resource limits, DTD/encoding, ID conflicts, signature-filename semantics and no extraction/execution. No WGT, SDK/client or exploit is distributed.
+- Excluded the reviewed unmodified TizenBrew Installer from execution after inspecting TLS disabling, broad listeners/account flows and certificate storage. TizenBrew's dynamic defaults need a separate review before first launch.
+- Expanded LG SlopBro to an explicit gated Root workflow at the user's request. Reviewed its Homebrew dependency's startup/elevation and remote-access effects, and separated host timeout from TV-side cancellation. No actual device execution is claimed.
+- Samsung Root is separately documented as experimental static research with exact upstream evidence. It is not a use of SlopBro on Tizen.
+
 ## 0.4.0 platform-extension review — 2026-10-20
 
 - Separated Android gates from LG identity, pairing, transport and app-lifecycle gates; Android user/serial requirements and offline guard are unchanged. Existing regression cases still reject webOS in Android JSON plans.
