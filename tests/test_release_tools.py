@@ -144,17 +144,17 @@ class ReleaseToolTests(unittest.TestCase):
 
     def test_skill_cannot_silently_select_another_upstream_revision(self):
         path = self.root / 'SKILL.md'
-        path.write_text(path.read_text().replace(checker.UPSTREAM_REVISION, '0' * 40))
+        path.write_text(path.read_text(encoding='utf-8').replace(checker.UPSTREAM_REVISION, '0' * 40), encoding='utf-8')
         self.assertTrue(any('upstream identity' in e for e in self.assertRejected()))
 
     def test_release_provenance_cannot_drift_from_reviewed_source(self):
         for name in ('NOTICE', 'references/upstream-review.md'):
             with self.subTest(name=name):
                 path = self.root / name
-                original = path.read_text()
-                path.write_text(original.replace(checker.UPSTREAM_REVISION, '1' * 40))
+                original = path.read_text(encoding='utf-8')
+                path.write_text(original.replace(checker.UPSTREAM_REVISION, '1' * 40), encoding='utf-8')
                 self.assertTrue(any('provenance differs' in e for e in self.assertRejected()))
-                path.write_text(original)
+                path.write_text(original, encoding='utf-8')
 
     def test_real_evidence_cannot_replace_synthetic_example(self):
         path = self.root / 'examples/snapshot.synthetic.json'
