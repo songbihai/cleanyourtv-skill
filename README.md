@@ -1,6 +1,6 @@
 # CleanYourTV Skill
 
-**[Chinese tutorial](docs/guide.zh-CN.md)** · Installation, copyable prompts, device review, launcher setup, and recovery.
+**English** | [简体中文](README.zh-CN.md)
 
 **Make Android TV cleanup easier and safer with your AI assistant.**
 
@@ -44,6 +44,8 @@ For device access, use an assistant with terminal access, Android SDK Platform T
 2. Open [SKILL.md](SKILL.md) in your assistant, or install this entire folder as a skill using your host's documented method. Preserve `references/` and `scripts/` beside it.
 3. Ask: `Use cleanyourtv-skill to audit my Android TV. Start in plan mode. Do not change the device. I will provide its exact ADB endpoint.`
 4. For a real operation, follow the snapshot and plan procedure in [plan-format.md](references/plan-format.md), review its output, and approve the exact change before execution.
+
+For step-by-step setup and copyable Chinese requests, see the [Chinese usage guide](docs/guide.zh-CN.md).
 
 To inspect the synthetic example without a TV, from the repository root:
 
@@ -97,7 +99,7 @@ Made by the maintainer of this skill. TVRemoteX is optional; the skill works ind
 
 ## Project status and publishing
 
-**Version 0.3.0.** Synced to the reviewed [cleanyourtv source revision](https://github.com/Gathin23/cleanyourtv/tree/7c61d3c57e561323b85d7096ee2b686685b9b499), whose launcher is version 2.3. The offline helpers and packaging tools have a **97-test suite**. See [VALIDATION.md](VALIDATION.md) for completed checks and the [Actions tab](https://github.com/songbihai/cleanyourtv-skill/actions) for cross-platform CI results.
+**Version 0.3.0.** Synced to the reviewed [cleanyourtv source revision](https://github.com/Gathin23/cleanyourtv/tree/7c61d3c57e561323b85d7096ee2b686685b9b499), whose launcher is version 2.3. The offline helpers and packaging tools have a **98-test suite**. See [VALIDATION.md](VALIDATION.md) for completed checks and the [Actions tab](https://github.com/songbihai/cleanyourtv-skill/actions) for cross-platform CI results.
 
 The skill builds on the upstream TV customization workflow. Consult upstream’s [device examples](https://github.com/Gathin23/cleanyourtv/tree/main/examples) for model-specific reports, then match the model, OS, and firmware to your TV. Keep device changes within the supported scope above and review each plan before execution.
 
