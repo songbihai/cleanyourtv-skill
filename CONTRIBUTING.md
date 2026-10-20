@@ -1,6 +1,6 @@
 # Contributing
 
-Use English for core instructions, documentation, code comments, CLI output, and synthetic examples. The maintainer-approved Chinese tutorial at `docs/guide.zh-CN.md` is the sole localized-document exception; keep its steps consistent with the English skill and references. Keep the skill model-independent and references small enough to load only when needed.
+Use English for core instructions, documentation, code comments, CLI output, and synthetic examples. Localized prose belongs in `README.zh-CN.md` and `docs/guide.zh-CN.md`; the English README also includes a native-language navigation label. Keep both READMEs aligned in features, installation, scope, release information, and asset disclosures when any of those change. Keep tutorial steps consistent with the English skill and references. Keep the skill model-independent and references small enough to load only when needed.
 
 For a change, explain the user-visible behavior, evidence, risks, recovery impact, and actual validation. New package evidence must identify model/firmware privately; public reports use redacted or synthetic data. A model match alone never justifies globally allowing a package. Do not add automatic disabling of stock Home, Setup Wizard, update services, or unknown dependencies.
 

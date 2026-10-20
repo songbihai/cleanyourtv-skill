@@ -2,8 +2,9 @@
 
 ## Unreleased
 
-- Add an optional Simplified Chinese tutorial covering setup, copyable requests, reviewed execution, launcher features, and recovery; link it from the English README.
-- Allow localized prose only in the declared tutorial file, keeping the core skill English and all existing publication checks active.
+- Add an optional Simplified Chinese tutorial covering setup, copyable requests, reviewed execution, launcher features, and recovery.
+- Provide complete English and Simplified Chinese READMEs with reciprocal native-language navigation and corresponding content; link the tutorial from Quick start.
+- Allow localized prose only in the declared Chinese documents and a single navigation line in the English README, keeping the core skill English and all existing publication checks active.
 
 ## 0.3.0 — 2026-10-19 (prerelease)
 
