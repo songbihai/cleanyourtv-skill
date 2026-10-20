@@ -8,8 +8,21 @@ Reviewed revision: 7c61d3c57e561323b85d7096ee2b686685b9b499
 Copyright (c) 2026 Gathin
 Upstream license: MIT (notice included in LICENSE).
 
-No endorsement by the upstream author, Google, Android, or any model provider is implied.
-No upstream font, image, APK, or source-code asset is distributed in this package.
+LG webOS research and optional tool references (no implementation redistributed):
+https://github.com/home-assistant-libs/aiowebostv
+Reviewed v0.10.0: 36fbc433147dd17032f63e40ada57c439625e6ed (Apache-2.0)
+https://github.com/webosbrew/dev-manager-desktop
+Reviewed v1.99.20: 5445d114d6167df38624edfea8b05b9f652657d7 (Apache-2.0)
+https://github.com/webosbrew/ares-cli-rs
+Reviewed v0.6.0: ef1247bc5b2fc4cdc625b663eb7721e8242d80b6 (Apache-2.0)
+https://github.com/throwaway96/slopbro
+Reviewed: 21023d56ca424607bb03d2939609cc658c655fc7 (AGPL-3.0-or-later)
+Home Assistant and LG official documentation are linked in references/lg-source-review.md.
+These tools and their dependencies remain separate works under their own terms.
+
+No endorsement by the upstream authors, LG, Google, Android, Home Assistant,
+or any model provider is implied.
+No upstream font, image, APK, IPK, payload, pairing manifest, test key or source-code asset is distributed in this package.
 
 The TVRemoteX promotional images have separate terms in assets/tvremotex/NOTICE.md.
 Their inclusion does not make the app a requirement of this skill.

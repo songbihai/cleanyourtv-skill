@@ -1,10 +1,20 @@
 # Validation record
 
-Date: 2026-10-19 (America/Los_Angeles).
+Date: 2026-10-20 (America/Los_Angeles).
 
-Package: CleanYourTV Skill 0.3.0 public prerelease.
+Package: CleanYourTV Skill 0.4.0 public prerelease.
 
-## Unreleased bilingual documentation
+## 0.4.0 LG webOS extension
+
+- Reviewed aiowebostv v0.10.0 (`36fbc433147dd17032f63e40ada57c439625e6ed`), webOS Dev Manager v1.99.20 (`5445d114d6167df38624edfea8b05b9f652657d7`), its ares-cli-rs v0.6.0 dependency (`ef1247bc5b2fc4cdc625b663eb7721e8242d80b6`) and SlopBro (`21023d56ca424607bb03d2939609cc658c655fc7`) as source, alongside Home Assistant and LG official documentation. See [source review](references/lg-source-review.md) for inspected files and boundaries.
+- Added platform routing, LG normal control and official developer-app procedures. Documented SSAP's plaintext/unverified-TLS behavior, SSH server-trust limits, physical confirmation, pairing/access effects, bounded single actions, developer expiry and existing-root conflicts. Added explicitly requested SlopBro static research; no payload or root execution is supported.
+- Kept `scripts/plan_guard.py` byte-identical to 0.3.0. Its existing unsupported-platform regression rejects webOS; the LG Markdown plan does not claim automated guard coverage. No network client or third-party implementation was added.
+- Expanded the declared manifest to **44 files** with three English references, corresponding bilingual README/tutorial changes, and pinned-source provenance regressions. All four promotional PNG hashes and localization restrictions remain unchanged.
+- Ran all **100 offline tests** with Python 3.12.14 on macOS: passed. The repository checker, synthetic demo, skill frontmatter validator and whitespace check passed. Deterministic archive construction was checked by the suite, including byte preservation of translated documents and rejection of changed assets, undeclared files and source-pin drift.
+- Added 20 LG/research cases to the manual behavioral protocol. These are test scenarios, not completed independent model runs. Source review and offline tests do not exercise a TV, pairing, firmware dependencies or every third-party binary/dependency.
+- No TV was connected or changed; no LG client was installed or run, no upstream executable was imported, and no exploit server or payload was executed. Hosted matrix outcomes belong to the release pull request and Actions tab once completed; historical records below retain their original scope.
+
+## Bilingual documentation included in 0.4.0
 
 - Added a complete Chinese README with reciprocal language navigation, plus the optional Chinese tutorial (41 files in the current source manifest). Core instructions and execution boundaries remain English and unchanged.
 - Restricted localized documents to `README.zh-CN.md` and `docs/guide.zh-CN.md`, with only a standalone language-navigation line allowed in the English README. Regressions check UTF-8 archive preservation, reference validation in both translations, and continued rejection of Chinese body prose in English core files.

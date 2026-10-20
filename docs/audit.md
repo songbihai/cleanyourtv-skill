@@ -1,5 +1,15 @@
 # Safety, portability, and publication review
 
+## 0.4.0 platform-extension review — 2026-10-20
+
+- Separated Android gates from LG identity, pairing, transport and app-lifecycle gates; Android user/serial requirements and offline guard are unchanged. Existing regression cases still reject webOS in Android JSON plans.
+- Reviewed aiowebostv and Dev Manager release sources, Dev Manager's SSH dependency and SlopBro. Documented plaintext/unverified-TLS and unauthenticated-server SSH behavior instead of implying secure defaults from project maturity.
+- Reused maintained clients rather than adding a network executor. Restricted LG to normal single-target control and reviewed user-owned developer apps; SlopBro is explicit static research only.
+- Corrected SECURITY.md's stale supported-version line. Extended the declared manifest and provenance checks without broadening the approved PNG or localization exceptions.
+- Added mocked LG cases for pairing grants, target drift, permission errors, action context, developer expiry/root conflict, timeout reconciliation, and no payload-test execution. These are a manual protocol, not fabricated cross-model results.
+
+## Historical 0.2.0 review
+
 Review date: 2026-10-19. Reviewed the complete 0.1.0 local draft; fixes are in the 0.2.0 candidate. All reproductions used local synthetic files. No TV, ADB transport, or model-provider API was used. This is an author review with regression tests, not an independent security certification.
 
 | Finding | Reproduction or inspection | Fix |

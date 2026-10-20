@@ -2,23 +2,25 @@
 
 [English](README.md) | **简体中文**
 
-**让 AI 助手帮你更方便、更安全地清理和定制 Android TV。**
+**让 AI 助手帮你更方便、更安全地定制电视：清理 Android TV，控制 LG webOS。**
 
-用 AI 助手审查不需要的预装应用，并为常用 App 配置更简洁的电视桌面。CleanYourTV Skill 将 [Gathin23/cleanyourtv](https://github.com/Gathin23/cleanyourtv) 整理为适用于 Android TV 和 Google TV 的可复用流程：核对电视、审阅清理计划，只执行你批准的变更。
+用 AI 助手审查 Android TV 预装应用、配置简洁桌面，或控制 LG webOS 电视、测试自己的 webOS 应用。CleanYourTV Skill 将 [Gathin23/cleanyourtv](https://github.com/Gathin23/cleanyourtv) 的 Android 流程与经过审查的 LG 工具结合：先识别电视系统，再选择对应流程，只执行你批准的变更。
 
 ## 为什么使用这个 Skill？
 
 - **使用更方便。** 安装一份可复用技能，直接描述目标。助手按需使用审查、清理、桌面或恢复流程，并读取相关参考资料；你也可以使用现成的提问示例。
-- **执行更安全。** 明确核对设备身份，先确认计划，再按单个应用逐项操作；保护关键功能，记录恢复步骤。结果不明确时停止后续变更，不盲目重试。
+- **执行更安全。** 明确核对设备身份，先确认计划；Android 按单个应用逐项操作，LG 核对配对权限与连接限制；保护关键功能，记录恢复步骤。结果不明确时停止后续变更，不盲目重试。
 - **适配不同助手。** 通用 Markdown 和仅依赖 Python 标准库的工具，让流程不绑定模型厂商。助手根据现有工具与权限工作；没有设备访问能力时，也可以只做计划。
 
-这些约束旨在减少改错电视、误伤关键功能，以及未核对目标就复制命令或应用清单造成的错误。整个流程保留原有桌面和设置向导。
+这些约束旨在减少改错电视、误伤关键功能，以及未核对目标就复制命令或应用清单造成的错误。Android 流程保留原有桌面和设置向导；LG 流程保留系统 Home 与系统服务，使用独立的身份、配对和恢复流程。
 
 ## 可以做什么
 
-- **清理不需要的应用。** 审查预装应用和推广服务，了解它们的作用，逐项停用你批准的应用包。
-- **定制电视桌面。** 构建和配置上游轻量、Apple TV 风格的桌面，设置常用应用 Dock、应用网格和主题。能否切换默认 Home 取决于固件，原有桌面会保持启用。
+- **清理 Android 应用。** 审查预装应用和推广服务，了解它们的作用，逐项停用你批准的应用包。
+- **定制 Android 桌面。** 构建和配置上游轻量、Apple TV 风格的桌面，设置常用应用 Dock、应用网格和主题。能否切换默认 Home 取决于固件，原有桌面会保持启用。
 - **使用新版桌面功能。** 逐张审查模块卡片，调整布局与动效，按需配置遥控按键辅助。Private DNS 和已有私有远程连接遵循[独立流程](references/network-extras.md)。
+- **免 Root 控制 LG webOS。** 使用已有的 [Home Assistant LG 集成](https://www.home-assistant.io/integrations/webostv/) 或 [aiowebostv](https://github.com/home-assistant-libs/aiowebostv) 调整音量、导航、播放、启动已安装应用及切换 HDMI；通过官方开发模式和 [webOS Dev Manager](https://github.com/webosbrew/dev-manager-desktop) 或 LG CLI 测试自己的 webOS 应用。详见 [LG 流程](references/webos.md)。
+- **单独研究 SlopBro。** 只有明确提出请求才启用 [SlopBro / Root 研究模块](references/slopbro-research.md)，分析原理、持久化影响、源码信任和恢复条件；仅输出研究与准备度报告。
 - **记录每一步变更。** 批准前先看预期影响与恢复方法，变更后确认电视的必要功能仍正常。
 
 可以这样开始：
@@ -29,7 +31,15 @@
 修改前先给我看计划。
 ```
 
-实际连接设备，需要助手具备终端访问能力、Android SDK Platform Tools（ADB），以及电视端的调试授权。也可以在聊天助手中提供必要的命令输出，仅审阅计划。无需 Root。
+LG 可以这样开始：
+
+```text
+请使用 cleanyourtv-skill 协助我的 LG webOS 电视。
+审阅我已有的 Home Assistant LG 实体及可用 App、HDMI 输入。
+我会确认准确的电视。先给计划，不重新配对、不安装、不改设置或发送控制。
+```
+
+Android 设备访问使用 ADB 和电视调试授权；LG 使用对应的配对控制器或开发工具，不使用 ADB，也不安装 Android 桌面。聊天助手可根据必要的私密证据审阅两类计划。日常控制与官方开发应用测试无需 Root。
 
 ## 包含哪些内容
 
@@ -40,10 +50,10 @@
 
 ## 快速开始
 
-1. 从 [v0.3.0 预发布版](https://github.com/songbihai/cleanyourtv-skill/releases/tag/v0.3.0) 下载源码或经过检查的技能 ZIP。使用自定义 ZIP 时，先核对相邻的 SHA-256 文件再解压。不要执行未经审阅分支中的设备命令。
+1. 从 [v0.4.0 预发布版](https://github.com/songbihai/cleanyourtv-skill/releases/tag/v0.4.0) 下载源码或经过检查的技能 ZIP。使用自定义 ZIP 时，先核对相邻的 SHA-256 文件再解压。不要执行未经审阅分支中的设备命令。
 2. 在助手中打开 [SKILL.md](SKILL.md)，或按客户端的安装方式安装整个技能目录。保留同级的 `references/` 和 `scripts/`。
 3. 提问：`请使用 cleanyourtv-skill 审查我的 Android TV。先做计划，不修改设备。我会提供准确的 ADB 连接端点。`
-4. 实际操作前，按[计划格式说明](references/plan-format.md)准备快照与计划，审阅检查器输出，再批准准确的变更范围。
+4. Android 应用清理按[计划格式说明](references/plan-format.md)使用快照和离线检查器；LG 按 [webOS 流程](references/webos.md)审阅目标、配对和操作。执行前确认准确影响；Android 检查器不验证 LG 操作。
 
 首次使用或需要完整的中文对话示例，请阅读[中文使用教程](docs/guide.zh-CN.md)。
 
@@ -73,11 +83,17 @@ python3 scripts/check_repository.py
 
 [兼容性指南](docs/compatibility.md)包含客户端官方文档、可复制请求、命令参数处理和能力不足时的替代流程。
 
-技能本身不要求 API、厂商 SDK、MCP 服务、特定模型的系统提示词或付费服务。实际执行需要 Android SDK Platform Tools 和电视授权。构建上游桌面还需要对应的 JDK、Android SDK、Gradle 工具链及依赖下载。
+技能本身不要求 API、厂商 SDK、MCP 服务、特定模型的系统提示词或付费服务。Android 执行使用 Platform Tools；桌面构建还需要上游 JDK、Android SDK、Gradle。LG 可复用已有 Home Assistant 集成或 Dev Manager 图形界面；单独使用 aiowebostv 客户端需要 Python 3.11+ 及其依赖。可选工具安装、配对和下载有各自的授权与信任要求。
 
 ## 支持范围
 
-在 Android TV / Google TV 上进行审查和经过仔细审阅的逐用户应用停用；构建、安装和配置上游桌面，并保留系统原有 Home。Samsung Tizen、LG webOS、Fire OS、受管理设备、其他用户会话的修改、Root、刷机，以及停用系统桌面或设置向导，均不在当前范围内。这些边界也适用于上游提供了更广泛操作流程的情况。
+| 平台 / 模式 | 支持的操作 |
+| --- | --- |
+| Android TV / Google TV | 审查、经批准的逐用户应用停用，以及保留系统 Home 的上游桌面构建、安装和配置。 |
+| LG webOS，免 Root | 指定目标的日常遥控、状态与 App / 输入源审阅，以及通过官方开发模式测试自己的应用。不提供系统精简或 Android 桌面替换。 |
+| 明确启用的 SlopBro / Root 研究 | 固定源码分析和针对具体电视的准备度报告；不执行漏洞、不 Root、不建立持久化。 |
+
+Samsung Tizen、LG NetCast、Fire OS、受管理设备、Android 其他用户会话修改、刷机、移除系统应用及停用系统桌面或设置向导仍不在范围内。LG 客户端存在[连接信任和开发会话限制](references/webos.md)，需要可信私有网络并确认实体电视。
 
 每次变更前都要核对真实设备输出和目标电视。离线检查器核对计划结构、受保护包名、设备身份字段和恢复数据；固件依赖仍需要针对具体设备审查。详见 [SECURITY.md](SECURITY.md)。
 
@@ -99,12 +115,12 @@ TVRemoteX 为 iPhone 和 iPad 提供日常电视遥控功能：使用触控板�
 
 ## 项目状态与发布
 
-**版本 0.3.0。** 已同步到审查过的 [cleanyourtv 源码提交](https://github.com/Gathin23/cleanyourtv/tree/7c61d3c57e561323b85d7096ee2b686685b9b499)，该提交的桌面版本为 2.3。离线工具和打包工具包含 **98 项测试**。已完成的检查见 [VALIDATION.md](VALIDATION.md)，跨平台 CI 结果见 [Actions](https://github.com/songbihai/cleanyourtv-skill/actions)。
+**版本 0.4.0。** 已同步到审查过的 [cleanyourtv 源码提交](https://github.com/Gathin23/cleanyourtv/tree/7c61d3c57e561323b85d7096ee2b686685b9b499)，该提交的桌面版本为 2.3。离线工具和打包工具包含 **100 项测试**。已完成的检查见 [VALIDATION.md](VALIDATION.md)，跨平台 CI 结果见 [Actions](https://github.com/songbihai/cleanyourtv-skill/actions)。
 
 技能基于上游的电视定制流程。可以查阅上游[设备示例](https://github.com/Gathin23/cleanyourtv/tree/main/examples)，再核对自己的型号、系统和固件；设备操作仍应遵守上述范围，并在执行前逐项审阅计划。
 
-[上游审查记录](references/upstream-review.md)说明固定提交与来源；[行为评估场景](docs/evaluation.md)用于评估助手表现；[发布指南](docs/release.md)说明发布流程；最新 CI 状态见 [Actions](https://github.com/songbihai/cleanyourtv-skill/actions)。
+[上游审查记录](references/upstream-review.md)说明 Android 来源；[LG 来源审查](references/lg-source-review.md)记录工具版本及发现；[行为评估场景](docs/evaluation.md)用于评估助手表现；[发布指南](docs/release.md)说明发布流程；最新 CI 状态见 [Actions](https://github.com/songbihai/cleanyourtv-skill/actions)。
 
-需要构建只包含声明文件与已审查图片的归档时，执行 `python3 scripts/build_release.py --output /path/outside/repository/cleanyourtv-skill-0.3.0.zip`。工具拒绝覆盖已有输出，并生成相邻的 `.sha256` 文件。[审查报告](docs/audit.md)记录了审查范围与限制。
+需要构建只包含声明文件与已审查图片的归档时，执行 `python3 scripts/build_release.py --output /path/outside/repository/cleanyourtv-skill-0.4.0.zip`。工具拒绝覆盖已有输出，并生成相邻的 `.sha256` 文件。[审查报告](docs/audit.md)记录了审查范围与限制。
 
-指令与工具采用 MIT 许可；推广图片遵循[独立条款](assets/tvremotex/NOTICE.md)。[NOTICE](NOTICE) 和 [LICENSE](LICENSE) 保留上游署名。这是独立项目，并非上游或 Android 官方项目。
+指令与工具采用 MIT 许可；推广图片遵循[独立条款](assets/tvremotex/NOTICE.md)。[NOTICE](NOTICE) 和 [LICENSE](LICENSE) 保留上游署名。这是独立项目，并非上游、LG、Home Assistant 或 Android 官方项目。可选第三方工具遵循各自许可，技能不捆绑客户端、IPK 或漏洞代码。
