@@ -84,7 +84,15 @@ class WgtTests(unittest.TestCase):
     def test_traversal_and_absolute_paths_are_rejected(self):
         for name in ('../outside', '/absolute', 'a/../b', 'a\\b', 'C:drive', 'a//b', './config.xml'):
             with self.subTest(name=name):
-                self.make(extras=[(name, 'synthetic')]); self.reject()
+                self.make(extras=[(name, 'synthetic')])
+                if '\\' in name:
+                    # Windows ZipInfo normalizes host separators when writing.
+                    # Restore the raw hostile names in both ZIP headers so the
+                    # fixture tests the same archive bytes on every host.
+                    data = self.path.read_bytes().replace(name.replace('\\', '/').encode(), name.encode())
+                    self.path.write_bytes(data)
+                    self.assertIn(name.encode(), data)
+                self.reject()
 
     def test_duplicate_case_and_unicode_collisions_are_rejected(self):
         for names in [('config.xml',), ('CONFIG.XML',), ('caf\u00e9', 'cafe\u0301')]:
