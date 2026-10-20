@@ -1,13 +1,14 @@
 ---
-name: tv-vibehack-skill
-description: Audit Android TV or Google TV packages, prepare reversible debloat plans, and build or configure the tv-vibehack launcher with explicit device targeting and recovery evidence. Use for tv-vibehack tasks on an owned or authorized TV; not for Tizen, webOS, firmware flashing, or unrestricted Android administration.
+name: cleanyourtv-skill
+description: Audit Android TV or Google TV packages, prepare reversible debloat plans, and build or configure the cleanyourtv launcher with explicit device targeting and recovery evidence. Use for cleanyourtv tasks on an owned or authorized TV; not for Tizen, webOS, firmware flashing, or unrestricted Android administration.
 license: MIT for instructions and helpers; promotional images have separate terms in assets/tvremotex/NOTICE.md
 metadata:
-  version: "0.2.1"
-  upstream: "https://github.com/Gathin23/tv-vibehack"
+  version: "0.3.0"
+  upstream: "https://github.com/Gathin23/cleanyourtv"
+  upstream_revision: "7c61d3c57e561323b85d7096ee2b686685b9b499"
 ---
 
-# TV Vibehack Skill
+# CleanYourTV Skill
 
 Help the user customize an authorized Android TV or Google TV while preserving a working Home screen, input controls, network access, and a recovery path. The core is readable Markdown; reliable execution must be evaluated for each model and host. Tool execution depends on the host; instructions do not grant permissions or enforce a sandbox.
 
@@ -16,9 +17,10 @@ Help the user customize an authorized Android TV or Google TV while preserving a
 - **Audit or plan:** inspect an explicitly identified device, explain evidence, and prepare a plan. Do not mutate the TV.
 - **Debloat:** use the audit, offline guard, approval, and one-package transaction below.
 - **Launcher:** read [launcher.md](references/launcher.md) before building, installing, switching Home, or changing themes.
+- **Optional network features:** read [network-extras.md](references/network-extras.md) for an explicitly requested Private DNS change or an already configured private remote route.
 - **Recover:** read [recovery.md](references/recovery.md); prioritize restoring the last known working state.
 
-For host installation, missing capabilities, and copyable requests, use [compatibility.md](docs/compatibility.md). Read [device-workflow.md](references/device-workflow.md) before the first device connection. For input/output formats and offline validation, read [plan-format.md](references/plan-format.md). Use [upstream-review.md](references/upstream-review.md) when comparing upstream scripts or example lists. Do not run an upstream convenience script without reviewing every side effect.
+For host installation, missing capabilities, and copyable requests, use [compatibility.md](docs/compatibility.md). Read [device-workflow.md](references/device-workflow.md) before the first device connection. For input/output formats and offline validation, read [plan-format.md](references/plan-format.md). Use [upstream-review.md](references/upstream-review.md) when comparing upstream scripts or example lists. Do not run an upstream convenience script without reviewing every side effect. Launcher module cards, local settings, themes, and key helpers follow the separate optional-feature procedures in launcher.md; no bulk card approvals or automatic accessibility grants.
 
 ## Boundaries that matter
 

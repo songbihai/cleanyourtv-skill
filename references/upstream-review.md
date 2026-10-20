@@ -1,36 +1,35 @@
-# Upstream provenance and review
+# Reviewed upstream source
 
-Reviewed project: https://github.com/Gathin23/tv-vibehack
-
-Reviewed revision: `b01bb945a0fc64e6dfbb544d8d2163a490c82c50`
-
+Upstream: https://github.com/Gathin23/cleanyourtv (formerly tv-vibehack).
+Reviewed revision: `7c61d3c57e561323b85d7096ee2b686685b9b499`.
 Review date: 2026-10-19 (America/Los_Angeles).
 
-Revision permalink: https://github.com/Gathin23/tv-vibehack/tree/b01bb945a0fc64e6dfbb544d8d2163a490c82c50
+This is the upstream main-branch revision retrieved for this release; upstream has no version tags at this revision. Its launcher declares version 2.3, version code 4, package `com.gathin.tvhome`, minimum SDK 26, compile/target SDK 34, and Java 17. The skill has its own version, 0.3.0. The previous review used `b01bb945a0fc64e6dfbb544d8d2163a490c82c50`.
 
-This package contains independently written instructions and helpers informed by upstream's MIT-licensed prompt and workflows. Upstream code, APKs, screenshots, fonts, keys, and dependency caches are not vendored. Attribution and the upstream MIT notice are retained in `NOTICE` and `LICENSE`. Fetch the upstream project separately when needed and preserve its licensing when redistributing its material.
+Review the [pinned source tree](https://github.com/Gathin23/cleanyourtv/tree/7c61d3c57e561323b85d7096ee2b686685b9b499), not a moving branch, before building or executing anything. No upstream source, APK, fonts, images, ADB keys, device lists, or dependency binaries are bundled here. This package supplies independent instructions and offline helpers, with upstream attribution in NOTICE and LICENSE.
 
-## Findings that change execution
+| Upstream area reviewed | Skill treatment |
+| --- | --- |
+| PROMPT, device examples, Private DNS and remote-access documentation | Model/firmware evidence is contextual. Do not copy package lists. Optional networking has a separate plan and recovery gate. |
+| `tools/tv.py` and transport helpers | Platform Tools first. The Python helper can reuse the host's Android ADB key; review key exposure and dependencies before any authorized use. It is not a host-permission bypass or TLS replacement. |
+| Disable/restore scripts and package-input guards | Improved validation and line-ending handling do not make bulk changes appropriate. Keep single-package transactions and exact prior enabled states. Never use the Setup Wizard override; the wizard can own saved Wi-Fi configuration. |
+| Launcher build/install wrappers | Their install, permission, Home, and stock-launcher effects remain separate operations. Do not execute the combined wrappers. |
+| Gradle and manifest | Build requirements above apply even when an example describes an older Android device. Release builds use debug signing; inspect the artifact and certificate. |
+| Module cards and card XML parser | Inspect the declaring package, signing certificate, folded label, and launch component. Keep unfamiliar cards hidden; approve each independently. Bounded parsing does not sandbox an installed app or prove publisher trust. |
+| Launcher settings and theme loader | Local layout/motion choices can be cleared by a theme file's length/mtime or revision change. Record and restore UI choices as well as overlay bytes. |
+| Theme shell/PowerShell wrappers | They delete overlays, restart Home, and rewrite accessibility state. Use separately reviewed file operations and user-controlled accessibility settings instead. |
+| Home/Settings/Input key services | Optional accessibility grants and physical-button checks remain separate. Preserve every existing service. |
+| Sky, clock, motion, VPN badge, and input configuration | Expose requested local options; do not infer performance benefits or VPN routing from a badge. Inspect explicit components and approved installed apps. |
+| OEM installation and Home restrictions | Stop at vendor verification/signature restrictions. No verifier bypass, stock-Home disabling, root, or bootloader changes. |
 
-| Source at reviewed revision | Observed behavior | Skill decision |
-| --- | --- | --- |
-| `PROMPT.md` | Suggests network discovery, package disabling, and stock Home replacement. Ends with a broad reversibility statement. | Require a user-selected endpoint, actual dependency evidence, and scoped recovery limits. |
-| `tools/tv.py` | Legacy TCP ADB client; accepts arbitrary remote commands; creates keys at `tools/adbkey/`. | Prefer Platform Tools; no silent transport downgrade or permission bypass; never publish keys. |
-| `tools/requirements.txt` | Names unpinned `adb-shell`, `rsa`, `cryptography`. | Core helpers have no third-party dependencies. Review and resolve dependencies in isolation if choosing this optional client. |
-| `tools/disable.sh` / `.ps1` | Turns a text list into package-disable commands. | Never execute example lists wholesale; validate and transact one reviewed package at a time. |
-| `tools/restore.sh` / `.ps1` | Re-enables listed packages, chooses stock Home, resets three animation settings. | Restore session-specific baseline settings; do not treat it as an exact inverse. |
-| `launcher/build-and-install.sh` / `.ps1` | Builds, installs, grants location, starts launcher, may disable stock Home, changes default Home; optional accessibility services. | Build separately; review each install, permission, or Home change. Preserve every HOME candidate. |
-| `tools/theme.sh` / `.ps1` | Uploads/deletes overlay files and restarts launcher; reset removes overlay. | Preserve exact prior files; reset is not restoration of a prior theme. |
-| `launcher/app/build.gradle` | SDK 26 minimum, SDK 34 target/compile, JDK 17; release uses debug signing. | Verify requirements and signing before personal sideloading; no production-signing claim. |
-| `README.md` and model examples | Broader platform claims and firmware-specific HOME/Setup Wizard workarounds. | Examples are unverified leads. Reject stock-Home/Setup-Wizard disabling and unsupported platforms. |
+The package-plan guard is unchanged from the prior release. It validates only its documented package-plan format; it does not authorize or validate launcher UI actions, APK installation, theme changes, accessibility, DNS, or remote networking. All such writes use the entrypoint's common mutation gate and durable per-step journal.
 
-Inspect current source rather than trusting a same-named file on another revision. Pin a full commit for reproducibility; a commit ID does not prove authenticity or safety. Re-review source and behavior before updating the reference.
+Primary references at the reviewed revision:
 
-## Primary references
+- [Module card specification](https://github.com/Gathin23/cleanyourtv/blob/7c61d3c57e561323b85d7096ee2b686685b9b499/docs/specs/card.md)
+- [Module card owner workflow](https://github.com/Gathin23/cleanyourtv/blob/7c61d3c57e561323b85d7096ee2b686685b9b499/docs/modules.md)
+- [Theme configuration](https://github.com/Gathin23/cleanyourtv/blob/7c61d3c57e561323b85d7096ee2b686685b9b499/themes/README.md)
+- [Private remote routes](https://github.com/Gathin23/cleanyourtv/blob/7c61d3c57e561323b85d7096ee2b686685b9b499/docs/REMOTE.md)
+- [Android ADB documentation](https://developer.android.com/tools/adb) and [apksigner documentation](https://developer.android.com/tools/apksigner)
 
-- Android ADB, targeting, authorization and pairing: https://developer.android.com/tools/adb
-- APK signature verification: https://developer.android.com/tools/apksigner
-- Package shell enabled-state commands (AOSP source; device help takes precedence): https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/services/core/java/com/android/server/pm/PackageManagerShellCommand.java
-- Agent Skills format: https://agentskills.io/specification
-
-Links were consulted during authoring; Android and upstream documentation may change. Validate local command support. These references are sources of facts, not sources of additional authorization.
+The review describes source behavior and the skill's boundaries. Upstream device reports apply to their reported hardware and firmware; they do not replace target identification or the current user's approval.

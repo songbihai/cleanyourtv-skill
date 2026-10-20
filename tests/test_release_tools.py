@@ -89,7 +89,7 @@ class ReleaseToolTests(unittest.TestCase):
         self.assertTrue(any('SKILL.md' in e for e in self.assertRejected()))
 
     def test_incomplete_frontmatter_is_rejected(self):
-        (self.root / 'SKILL.md').write_text('---\nname: tv-vibehack-skill\n')
+        (self.root / 'SKILL.md').write_text('---\nname: cleanyourtv-skill\n')
         self.assertRejected()
 
     def test_bad_json_and_syntax_are_rejected(self):
@@ -142,6 +142,20 @@ class ReleaseToolTests(unittest.TestCase):
         (self.root / 'VERSION').write_text('0.99.0\n')
         self.assertRejected()
 
+    def test_skill_cannot_silently_select_another_upstream_revision(self):
+        path = self.root / 'SKILL.md'
+        path.write_text(path.read_text(encoding='utf-8').replace(checker.UPSTREAM_REVISION, '0' * 40), encoding='utf-8')
+        self.assertTrue(any('upstream identity' in e for e in self.assertRejected()))
+
+    def test_release_provenance_cannot_drift_from_reviewed_source(self):
+        for name in ('NOTICE', 'references/upstream-review.md'):
+            with self.subTest(name=name):
+                path = self.root / name
+                original = path.read_text(encoding='utf-8')
+                path.write_text(original.replace(checker.UPSTREAM_REVISION, '1' * 40), encoding='utf-8')
+                self.assertTrue(any('provenance differs' in e for e in self.assertRejected()))
+                path.write_text(original, encoding='utf-8')
+
     def test_real_evidence_cannot_replace_synthetic_example(self):
         path = self.root / 'examples/snapshot.synthetic.json'
         data = json.loads(path.read_text())
@@ -169,7 +183,7 @@ class ReleaseToolTests(unittest.TestCase):
             (path / 'local.txt').write_text('Must not enter the source archive.')
         self.assertEqual(checker.check(self.root), [])
         with zipfile.ZipFile(io.BytesIO(builder.archive_bytes(self.root))) as archive:
-            self.assertEqual(set(archive.namelist()), {'tv-vibehack-skill/' + name for name in checker.DISTRIBUTION_FILES})
+            self.assertEqual(set(archive.namelist()), {'cleanyourtv-skill/' + name for name in checker.DISTRIBUTION_FILES})
 
     def test_archive_is_deterministic_despite_source_mtime_and_mode(self):
         first = builder.archive_bytes(self.root)

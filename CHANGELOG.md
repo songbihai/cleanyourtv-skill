@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 — 2026-10-19 (prerelease)
+
+- Rename the repository, skill, host metadata, and archive root to `cleanyourtv-skill`, following the upstream project rename.
+- Review and pin cleanyourtv commit `7c61d3c57e561323b85d7096ee2b686685b9b499` (launcher 2.3, versionCode 4), replacing the original upstream baseline.
+- Add procedures for module-card identity and consent, launcher settings and motion, theme preference restoration, and Home/Input/Settings key helpers.
+- Add scoped, optional Private DNS changes and use of an existing private remote route; preserve exact settings and require recovery before network writes.
+- Document new setup-wizard Wi-Fi dependencies, sideload restrictions, theme-script accessibility effects, and upstream key reuse. Preserve the existing protected-package and device-mutation gates.
+- Check upstream pin consistency during publication and keep the TVRemoteX showcase and its approved assets unchanged.
+
 ## 0.2.1 — 2026-10-19 (prerelease)
 
 - Name the repository, skill entrypoint, host metadata, and archive root `tv-vibehack-skill`.

@@ -2,7 +2,18 @@
 
 Date: 2026-10-19 (America/Los_Angeles).
 
-Package: TV Vibehack Skill 0.2.1 public prerelease.
+Package: CleanYourTV Skill 0.3.0 public prerelease.
+
+## 0.3.0 upstream synchronization
+
+- Reviewed upstream main revision `7c61d3c57e561323b85d7096ee2b686685b9b499` against the previous pin. Upstream has no version tags at this revision; the launcher declares version 2.3 (code 4).
+- Updated the skill/repository name and pinned source metadata, keeping independent skill versioning and historical records.
+- Added bounded module-card, local settings/theme recovery, physical remote-key, Private DNS, and existing-private-route procedures. Preserved every existing mutation gate, protected package rule, and stock Home / Setup Wizard restriction.
+- Kept the package command generator byte-identical. Optional feature writes are reviewed separately; the package guard does not validate those operations.
+- Expanded the publication manifest to 39 files and added regressions that reject upstream pin/provenance drift. The four promotional PNG hashes remain unchanged.
+- Ran all **95 offline tests** with Python 3.12.14 on macOS: passed. The repository checker, synthetic demo, skill frontmatter validator, and whitespace check also passed. No TV was connected or changed.
+- Hosted CI results are linked in the release and Actions tab. Historical completed checks below retain their original scope.
+
 
 ## 0.2.1 naming and README update
 
@@ -11,7 +22,7 @@ Package: TV Vibehack Skill 0.2.1 public prerelease.
 - Pinned the four reviewed PNG files by SHA-256. The publication checker still rejects undeclared files and changed assets, and now checks local HTML image references as well as Markdown links.
 - Ran all **93 offline tests** with Python 3.12.14 on macOS: passed. Ran the repository checker, synthetic demo, and skill frontmatter validator: passed.
 - Compared `scripts/plan_guard.py` and the device workflow references with the previous release: byte-identical. No device command or execution approval boundary changed.
-- [Validate run 39237849227](https://github.com/songbihai/tv-vibehack-skill/actions/runs/39237849227) passed all nine jobs for the reviewed update at `bccbc5d0cb6ddaf0cea921fa95279314fff2e3bc`. The suite contains 93 tests; the POSIX named-pipe case is intentionally skipped on Windows.
+- [Validate run 39237849227](https://github.com/songbihai/cleanyourtv-skill/actions/runs/39237849227) passed all nine jobs for the reviewed update at `bccbc5d0cb6ddaf0cea921fa95279314fff2e3bc`. The suite contains 93 tests; the POSIX named-pipe case is intentionally skipped on Windows.
 - Read back all 38 uploaded paths and file bytes from the update branch: identical to the reviewed package. Verified GitHub renders all four images at the correct proportions and the download link points to the U.S. App Store.
 - This validation-record-only commit is checked by subsequent PR/main runs. The historical runs below cover 0.2.0.
 
@@ -37,8 +48,8 @@ Development validation was offline except retrieving source, consulting primary 
 
 ## Completed on GitHub
 
-- Created the public [songbihai/tv-vibehack-safe repository](https://github.com/songbihai/tv-vibehack-skill). Read back all 33 source paths and file bytes: identical to the reviewed local source at commit `529c20300ee58d955a1ac35269ed0a3070c5a67a`.
-- [Validate run 39234904676](https://github.com/songbihai/tv-vibehack-skill/actions/runs/39234904676) completed successfully in all nine jobs: Python 3.10, 3.12, and 3.14 on ubuntu-latest, macos-latest, and windows-latest. These are runner labels; they do not certify every OS version.
+- Created the public [songbihai/tv-vibehack-safe repository](https://github.com/songbihai/cleanyourtv-skill). Read back all 33 source paths and file bytes: identical to the reviewed local source at commit `529c20300ee58d955a1ac35269ed0a3070c5a67a`.
+- [Validate run 39234904676](https://github.com/songbihai/cleanyourtv-skill/actions/runs/39234904676) completed successfully in all nine jobs: Python 3.10, 3.12, and 3.14 on ubuntu-latest, macos-latest, and windows-latest. These are runner labels; they do not certify every OS version.
 - The Windows Python 3.14 job reported 87 tests, OK with one expected skip for the POSIX named-pipe regression. Do not interpret a platform-specific skip as an executed test.
 - Verified that private vulnerability reporting is enabled. GitHub secret scanning and push protection were enabled in the repository settings. No persistent credentials or repository secrets are used by the validation workflow.
 - Publication metadata changes are checked by subsequent Validate runs linked from the repository Actions tab. The source commit/run above identifies the tested code; it does not claim an exact later commit was tested before that run exists.

@@ -1,10 +1,10 @@
-TV Vibehack Skill
+CleanYourTV Skill
 
 Independent instructions and offline helpers, 2026.
 
-Based on concepts and workflows from tv-vibehack:
-https://github.com/Gathin23/tv-vibehack
-Reviewed revision: b01bb945a0fc64e6dfbb544d8d2163a490c82c50
+Based on concepts and workflows from cleanyourtv (formerly tv-vibehack):
+https://github.com/Gathin23/cleanyourtv
+Reviewed revision: 7c61d3c57e561323b85d7096ee2b686685b9b499
 Copyright (c) 2026 Gathin
 Upstream license: MIT (notice included in LICENSE).
 

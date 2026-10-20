@@ -1,19 +1,22 @@
-# TV Vibehack Skill
+# CleanYourTV Skill
 
 **A cleaner Android TV, guided by your AI assistant.**
 
-Use your AI assistant to review unwanted preinstalled apps and set up a simpler home screen with your favorite apps. TV Vibehack Skill adapts [Gathin23/tv-vibehack](https://github.com/Gathin23/tv-vibehack) into a reusable workflow for Android TV and Google TV: inspect your TV, review a cleanup plan, and apply only the changes you approve.
+Use your AI assistant to review unwanted preinstalled apps and set up a simpler home screen with your favorite apps. CleanYourTV Skill adapts [Gathin23/cleanyourtv](https://github.com/Gathin23/cleanyourtv) into a reusable workflow for Android TV and Google TV: inspect your TV, review a cleanup plan, and apply only the changes you approve.
 
 ## What you can do
 
 - **Clean up unwanted apps.** Review preinstalled apps and promotional services, understand what they do, and disable approved packages one at a time.
 - **Personalize your home screen.** Build and configure the upstream lightweight, Apple TV-style launcher with a favorites dock, app grid, and themes. Switching the default Home depends on your firmware; the original launcher stays enabled.
+- **Use the latest launcher features.** Review module cards individually, adjust launcher layout and motion, and configure remote-key helpers when requested. Optional Private DNS and existing private remote connections have [separate procedures](references/network-extras.md).
 - **Keep track of every change.** Review expected effects and recovery steps before approving a change, then check that your essential TV functions still work.
 
 Start with a request like:
 
 ```text
-Use tv-vibehack-skill to help me clean up my Android TV and set up a simpler home screen. Keep my streaming apps, casting, and voice controls. Show me a plan before changing anything.
+Use cleanyourtv-skill to help me clean up my Android TV
+and set up a simpler home screen. Keep my streaming apps,
+casting, and voice controls. Show me a plan before changing anything.
 ```
 
 For device access, use an assistant with terminal access, Android SDK Platform Tools (ADB), and debugging authorization from your TV. You can also review plans in a chat assistant by providing the required command output. No root is required.
@@ -27,9 +30,9 @@ For device access, use an assistant with terminal access, Android SDK Platform T
 
 ## Quick start
 
-1. Download the source or checked ZIP from the [v0.2.1 prerelease](https://github.com/songbihai/tv-vibehack-skill/releases/tag/v0.2.1). For the custom ZIP, verify the adjacent SHA-256 file before extraction. Do not run device commands from an unreviewed branch.
+1. Download the source or checked ZIP from the [v0.3.0 prerelease](https://github.com/songbihai/cleanyourtv-skill/releases/tag/v0.3.0). For the custom ZIP, verify the adjacent SHA-256 file before extraction. Do not run device commands from an unreviewed branch.
 2. Open [SKILL.md](SKILL.md) in your assistant, or install this entire folder as a skill using your host's documented method. Preserve `references/` and `scripts/` beside it.
-3. Ask: `Use tv-vibehack-skill to audit my Android TV. Start in plan mode. Do not change the device. I will provide its exact ADB endpoint.`
+3. Ask: `Use cleanyourtv-skill to audit my Android TV. Start in plan mode. Do not change the device. I will provide its exact ADB endpoint.`
 4. For a real operation, follow the snapshot and plan procedure in [plan-format.md](references/plan-format.md), review its output, and approve the exact change before execution.
 
 To inspect the synthetic example without a TV, from the repository root:
@@ -48,8 +51,8 @@ The skill uses ordinary Markdown and the [Agent Skills format](https://agentskil
 
 | Host capability | Use |
 | --- | --- |
-| Native Agent Skills loader | Install the whole folder; invoke `tv-vibehack-skill` using the host's syntax. |
-| Codex | Copy the folder to `~/.agents/skills/tv-vibehack-skill/`; invoke `$tv-vibehack-skill`. Optional `agents/openai.yaml` supplies UI text. |
+| Native Agent Skills loader | Install the whole folder; invoke `cleanyourtv-skill` using the host's syntax. |
+| Codex | Copy the folder to `~/.agents/skills/cleanyourtv-skill/`; invoke `$cleanyourtv-skill`. Optional `agents/openai.yaml` supplies UI text. |
 | Claude Code | Use the personal or project skill location and invocation described in [compatibility.md](docs/compatibility.md). |
 | Gemini CLI | Use its documented skill discovery and consent flow; see [compatibility.md](docs/compatibility.md). |
 | Chat assistant with file access, no shell | Read the skill and relevant references; produce plans and ask the user for command output. |
@@ -84,12 +87,12 @@ Made by the maintainer of this skill. TVRemoteX is optional; the skill works ind
 
 ## Project status and publishing
 
-**Version 0.2.1.** The offline helpers and packaging tools have a **93-test suite**, and the [0.2.1 release validation](https://github.com/songbihai/tv-vibehack-skill/actions/runs/39238327373) passed all nine configured Python/OS jobs across Linux, macOS, and Windows. See [VALIDATION.md](VALIDATION.md) for the recorded checks and platform-specific results.
+**Version 0.3.0.** Synced to the reviewed [cleanyourtv source revision](https://github.com/Gathin23/cleanyourtv/tree/7c61d3c57e561323b85d7096ee2b686685b9b499), whose launcher is version 2.3. The offline helpers and packaging tools have a **95-test suite**. See [VALIDATION.md](VALIDATION.md) for completed checks and the [Actions tab](https://github.com/songbihai/cleanyourtv-skill/actions) for cross-platform CI results.
 
-The skill builds on the upstream TV customization workflow. Consult upstream’s [device examples](https://github.com/Gathin23/tv-vibehack/tree/main/examples) for model-specific reports, then match the model, OS, and firmware to your TV. Keep device changes within the supported scope above and review each plan before execution.
+The skill builds on the upstream TV customization workflow. Consult upstream’s [device examples](https://github.com/Gathin23/cleanyourtv/tree/main/examples) for model-specific reports, then match the model, OS, and firmware to your TV. Keep device changes within the supported scope above and review each plan before execution.
 
-See [upstream-review.md](references/upstream-review.md) for the reviewed revision and provenance, [evaluation.md](docs/evaluation.md) for assistant behavior scenarios, [release.md](docs/release.md) for publishing procedures, and the [Actions tab](https://github.com/songbihai/tv-vibehack-skill/actions) for current CI results.
+See [upstream-review.md](references/upstream-review.md) for the reviewed revision and provenance, [evaluation.md](docs/evaluation.md) for assistant behavior scenarios, [release.md](docs/release.md) for publishing procedures, and the [Actions tab](https://github.com/songbihai/cleanyourtv-skill/actions) for current CI results.
 
-To build a review archive containing only declared source and reviewed assets, run `python3 scripts/build_release.py --output /path/outside/repository/tv-vibehack-skill-0.2.1.zip`. It refuses existing output and writes a `.sha256` sidecar. The [audit report](docs/audit.md) records this review and its limits.
+To build a review archive containing only declared source and reviewed assets, run `python3 scripts/build_release.py --output /path/outside/repository/cleanyourtv-skill-0.3.0.zip`. It refuses existing output and writes a `.sha256` sidecar. The [audit report](docs/audit.md) records this review and its limits.
 
 Instructions and helpers are MIT licensed; promotional images have [separate terms](assets/tvremotex/NOTICE.md). Upstream attribution is preserved in [NOTICE](NOTICE) and [LICENSE](LICENSE). This is an independent project, not an official upstream or Android project.
