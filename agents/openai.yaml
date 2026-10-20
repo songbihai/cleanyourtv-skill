@@ -1,4 +1,4 @@
 interface:
   display_name: "CleanYourTV Skill"
-  short_description: "Plan TV changes with evidence and scoped recovery"
-  default_prompt: "Use $cleanyourtv-skill to audit my Android TV and prepare a reversible plan before any device changes."
+  short_description: "Android cleanup and LG webOS control with review"
+  default_prompt: "Use $cleanyourtv-skill to identify my TV platform and prepare the appropriate Android or LG webOS plan before any device changes."
