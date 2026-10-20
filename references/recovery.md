@@ -1,5 +1,7 @@
 # Recover from an interrupted or unhealthy session
 
+For LG webOS, use the recovery section in [webos.md](webos.md); the ADB/package steps below are Android-only. SlopBro research performs no device changes and supplies no root rollback.
+
 Stop forward work at the first failed health check. Use the saved local journal and confirmed identity, not a remembered upstream example list. Never broadcast a restore to all ADB devices. If the original plan explicitly included automatic rollback on a failed check, its scoped inverse is authorized; otherwise obtain authorization for the concrete recovery action. Host permissions still apply.
 
 A failed or unresolved Home check can be the damage recovery is intended to repair. It blocks new forward changes, but does not block a specifically authorized inverse of a matching journaled change when hardware identity, user/policy, and actual changed state are confirmed. Do not require Home to be healthy before restoring it. If identity or actual state cannot be established, stop device writes and use the physical/vendor path.
