@@ -39,6 +39,23 @@ class ReleaseToolTests(unittest.TestCase):
     def test_clean_declared_source_passes(self):
         self.assertEqual(checker.check(self.root), [])
 
+    def test_declared_localized_guide_is_checked_and_archived_as_utf8(self):
+        name = 'docs/guide.zh-CN.md'
+        path = self.root / name
+        original = path.read_bytes()
+        self.assertTrue(any(ord(char) > 127 for char in original.decode('utf-8')))
+        self.assertEqual(checker.check(self.root), [])
+        with zipfile.ZipFile(io.BytesIO(builder.archive_bytes(self.root))) as archive:
+            self.assertEqual(archive.read('cleanyourtv-skill/' + name), original)
+        with path.open('a', encoding='utf-8') as stream:
+            stream.write('\n[Missing](missing-localized-guide.md)\n')
+        self.assertTrue(any('Broken' in e for e in self.assertRejected()))
+
+    def test_localized_exception_does_not_allow_cjk_in_core_skill(self):
+        with (self.root / 'SKILL.md').open('a', encoding='utf-8') as stream:
+            stream.write('\n' + chr(0x4e2d) + chr(0x6587) + '\n')
+        self.assertTrue(any('CJK' in e for e in self.assertRejected()))
+
     def test_env_file_is_rejected(self):
         (self.root / '.env').write_text('SYNTHETIC_SETTING=not-a-real-secret\n')
         self.assertTrue(any('.env' in e for e in self.assertRejected()))
