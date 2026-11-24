@@ -14,6 +14,8 @@ Use your AI assistant to clean up Android TV, customize LG webOS, or install Jel
 
 These guardrails are designed to reduce wrong-device changes, unintended loss of TV functions, and mistakes from copying commands or package lists without checking the target TV. Android keeps the original launcher and Setup Wizard enabled; LG keeps its stock Home and system services intact. LG uses its own identity, pairing and recovery procedure rather than Android commands.
 
+Launcher 3.6 adds app-library controls, optional add-on cards, richer wallpapers/themes and remote-key mappings. Secure-settings repair and notification access are reviewed separately; ordinary installation does not enable them. See the [source refresh](references/upstream-review.md#36-changes-and-adoption-decisions).
+
 ## What you can do
 
 - **Clean up Android apps.** Review preinstalled apps and promotional services, understand what they do, and disable approved packages one at a time.
@@ -62,7 +64,7 @@ Android device access uses ADB and TV debugging authorization. LG uses its own p
 
 ## Quick start
 
-1. Download the source or checked ZIP from the [v0.5.0 prerelease](https://github.com/songbihai/cleanyourtv-skill/releases/tag/v0.5.0). For the custom ZIP, verify the adjacent SHA-256 file before extraction. Do not run device commands from an unreviewed branch.
+1. Use the current source folder for the 0.6.0 candidate, or download an already published version from [Releases](https://github.com/songbihai/cleanyourtv-skill/releases). For the custom ZIP, verify the adjacent SHA-256 file before extraction. Do not run device commands from an unreviewed branch.
 2. Open [SKILL.md](SKILL.md) in your assistant, or install this entire folder as a skill using your host's documented method. Preserve `references/` and `scripts/` beside it.
 3. Ask: `Use cleanyourtv-skill to audit my Android TV. Start in plan mode. Do not change the device. I will provide its exact ADB endpoint.`
 4. For Android package cleanup, use the snapshot and offline guard in [plan-format.md](references/plan-format.md). For LG, use [webos.md](references/webos.md); for Samsung apps, use [tizen.md](references/tizen.md) and its offline WGT inspector. Explicit LG Root has its own gate in [slopbro-research.md](references/slopbro-research.md). Review and authorize the exact effects before execution; the Android guard does not validate LG/Tizen/Root actions, and the WGT inspector is a review aid rather than an executor.
@@ -129,12 +131,12 @@ Made by the maintainer of this skill. TVRemoteX is optional; the skill works ind
 
 ## Project status and publishing
 
-**Version 0.5.0.** Synced to the reviewed [cleanyourtv source revision](https://github.com/Gathin23/cleanyourtv/tree/7c61d3c57e561323b85d7096ee2b686685b9b499), whose launcher is version 2.3. The offline helpers and packaging tools have a **126-test suite**. See [VALIDATION.md](VALIDATION.md) for completed checks and the [Actions tab](https://github.com/songbihai/cleanyourtv-skill/actions) for cross-platform CI results.
+**Version 0.6.0.** Synced to the reviewed [cleanyourtv source revision](https://github.com/Gathin23/cleanyourtv/tree/ec811adadbf093f63a388551741dc9fc7d33c960), whose launcher is version 3.6. The offline helpers and packaging tools have a **126-test suite**. See [VALIDATION.md](VALIDATION.md) for completed checks and the [Actions tab](https://github.com/songbihai/cleanyourtv-skill/actions) for cross-platform CI results.
 
 The skill builds on the upstream TV customization workflow. Consult upstream’s [device examples](https://github.com/Gathin23/cleanyourtv/tree/main/examples) for model-specific reports, then match the model, OS, and firmware to your TV. Keep device changes within the supported scope above and review each plan before execution.
 
 See [upstream-review.md](references/upstream-review.md) for Android provenance and [lg-source-review.md](references/lg-source-review.md) for LG tool versions and findings, [tizen-source-review.md](references/tizen-source-review.md) for Samsung application/installer choices, [evaluation.md](docs/evaluation.md) for assistant behavior scenarios, [release.md](docs/release.md) for publishing procedures, and the [Actions tab](https://github.com/songbihai/cleanyourtv-skill/actions) for current CI results.
 
-To build a review archive containing only declared source and reviewed assets, run `python3 scripts/build_release.py --output /path/outside/repository/cleanyourtv-skill-0.5.0.zip`. It refuses existing output and writes a `.sha256` sidecar. The [audit report](docs/audit.md) records this review and its limits.
+To build a review archive containing only declared source and reviewed assets, run `python3 scripts/build_release.py --output /path/outside/repository/cleanyourtv-skill-0.6.0.zip`. It refuses existing output and writes a `.sha256` sidecar. The [audit report](docs/audit.md) records this review and its limits.
 
 Instructions and helpers are MIT licensed; promotional images have [separate terms](assets/tvremotex/NOTICE.md). Upstream attribution is preserved in [NOTICE](NOTICE) and [LICENSE](LICENSE). This is an independent project, not an official upstream, Samsung, LG, Home Assistant or Android project. Optional third-party tools retain their own licenses; no client, IPK or exploit code is bundled.

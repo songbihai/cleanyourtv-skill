@@ -3,9 +3,9 @@ name: cleanyourtv-skill
 description: Customize authorized Android TV / Google TV, LG webOS and Samsung Tizen TVs. Review Android cleanup/launcher changes, LG controls and developer apps, or Tizen Jellyfin/Moonlight WGT builds and installation. Explicit LG SlopBro Root uses a separate gated workflow; no flashing or unrestricted system administration.
 license: MIT for instructions and helpers; promotional images have separate terms in assets/tvremotex/NOTICE.md
 metadata:
-  version: "0.5.0"
+  version: "0.6.0"
   upstream: "https://github.com/Gathin23/cleanyourtv"
-  upstream_revision: "7c61d3c57e561323b85d7096ee2b686685b9b499"
+  upstream_revision: "ec811adadbf093f63a388551741dc9fc7d33c960"
 ---
 
 # CleanYourTV Skill
@@ -27,7 +27,7 @@ For Android TV / Google TV:
 - **Optional network features:** read [network-extras.md](references/network-extras.md) for an explicitly requested Private DNS change or an already configured private remote route.
 - **Recover:** read [recovery.md](references/recovery.md); prioritize restoring the last known working state.
 
-For host installation, missing capabilities, and copyable requests, use [compatibility.md](docs/compatibility.md). For Android, read [device-workflow.md](references/device-workflow.md) before the first device connection. For input/output formats and offline validation, read [plan-format.md](references/plan-format.md). Use [upstream-review.md](references/upstream-review.md) when comparing upstream scripts or example lists. Do not run an upstream convenience script without reviewing every side effect. Launcher module cards, local settings, themes, and key helpers follow the separate optional-feature procedures in launcher.md; no bulk card approvals or automatic accessibility grants.
+For host installation, missing capabilities, and copyable requests, use [compatibility.md](docs/compatibility.md). For Android, read [device-workflow.md](references/device-workflow.md) before the first device connection. For input/output formats and offline validation, read [plan-format.md](references/plan-format.md). Use [upstream-review.md](references/upstream-review.md) when comparing upstream scripts or example lists. Do not run an upstream convenience script without reviewing every side effect. Launcher 3.6 add-ons, app library, module cards, local settings, themes, and key helpers follow the separate optional-feature procedures in launcher.md; no bulk card approvals or automatic accessibility grants. Secure-settings repair, notification-listener access and OEM autostart app-ops require separate review under launcher.md; upgrading an APK can retain old grants.
 
 ## Boundaries that matter
 

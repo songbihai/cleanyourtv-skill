@@ -18,3 +18,7 @@ Read this only for an explicit request to change the TV's Private DNS or use an 
 - Confirm stable hardware identity, firmware, current user, and session freshness through that exact target. If identity is unavailable, remain read-only. Require an available person at the TV and a physical recovery path before any mutation over a remote route.
 - Preserve the Wi-Fi, VPN, Setup Wizard, and network services carrying the connection. A launcher VPN badge is not evidence that traffic uses the expected route. Do not reboot by default or change networking just because a command times out.
 - At completion, revoke only temporary access that the user agreed to remove. Do not tear down pre-existing VPNs, routes, or ADB authorizations indiscriminately. Protect endpoints, key material, logs, and device identifiers from issues and release archives.
+
+## Reviewed native ADB backend
+
+The current upstream `tools/native-adb.md` describes `TV_ADB_BINARY` and `TV_HOST` for an already paired Google ADB transport. The pairing and connection ports are distinct; use the live connection endpoint and exact `-s` selection. This does not approve the upstream mutation wrappers. Keep Wireless debugging encryption where available; do not open legacy port 5555 for convenience. A Local Network denial or host-tool refusal must be resolved through the host's authorized permission flow, not an upstream relay or another client.

@@ -12,7 +12,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 UPSTREAM_URL = 'https://github.com/Gathin23/cleanyourtv'
-UPSTREAM_REVISION = '7c61d3c57e561323b85d7096ee2b686685b9b499'
+UPSTREAM_REVISION = 'ec811adadbf093f63a388551741dc9fc7d33c960'
 LG_SOURCE_PINS = {
     'https://github.com/home-assistant-libs/aiowebostv': '36fbc433147dd17032f63e40ada57c439625e6ed',
     'https://github.com/webosbrew/dev-manager-desktop': '5445d114d6167df38624edfea8b05b9f652657d7',

@@ -1,5 +1,15 @@
 # Validation record
 
+## 0.6.0 Android upstream refresh — 2026-11-23
+
+- Retrieved upstream main `ec811adadbf093f63a388551741dc9fc7d33c960`; launcher 3.6, versionCode 15, min SDK 26, compile/target SDK 34, Java source/target 17. Reviewed source surfaces and adoption decisions are recorded in [upstream-review.md](references/upstream-review.md).
+- Updated launcher/add-on/theme/key-repair and paired-native-ADB instructions, English/Chinese READMEs, Chinese tutorial, source pin checker, security support version and release guidance. LG/Tizen pins and workflows are not refreshed in this Android-focused change.
+- Ran all **126 offline tests** on macOS Python 3.12.14: passed. Repository checks, skill-creator quick_validate (PyYAML 6.0.3 in an isolated temporary venv), synthetic demo and git diff whitespace check passed. Final git ls-remote confirmed the pinned revision was still upstream HEAD. The existing provenance regressions exercise the new Android pin.
+- Added seven manual behavioral cases for retained grants, ordinary install, OEM identity, add-ons, wallpaper recovery, permission denials and key mappings. These are protocols, not completed independent model evaluations.
+- `plan_guard.py`, `inspect_wgt.py` and the four promotional PNGs remain byte-identical to 0.5.0; the distribution manifest remains **49 files**. No new third-party implementation or dependency was introduced.
+- No upstream executable, build, APK, client or TV command was run. No television was connected or modified. This local candidate has not been uploaded or run in hosted CI; historical CI results apply to their recorded versions.
+
+
 Date: 2026-10-20 (America/Los_Angeles).
 
 Package: CleanYourTV Skill 0.5.0 public prerelease.

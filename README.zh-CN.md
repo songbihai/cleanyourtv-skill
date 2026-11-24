@@ -14,6 +14,8 @@
 
 这些约束旨在减少改错电视、误伤关键功能，以及未核对目标就复制命令或应用清单造成的错误。Android 流程保留原有桌面和设置向导；LG 流程保留系统 Home 与系统服务，使用独立的身份、配对和恢复流程。
 
+启动器已同步至 3.6：增加应用库、可选附加应用卡片、更多主题壁纸和遥控按键映射。自动修复所需的安全设置写入和通知访问权限单独审查，普通安装不会自动开启。详见[源码同步记录](references/upstream-review.md#36-changes-and-adoption-decisions)。
+
 ## 可以做什么
 
 - **清理 Android 应用。** 审查预装应用和推广服务，了解它们的作用，逐项停用你批准的应用包。
@@ -61,7 +63,7 @@ Android 设备访问使用 ADB 和电视调试授权；LG 使用对应的配对�
 
 ## 快速开始
 
-1. 从 [v0.5.0 预发布版](https://github.com/songbihai/cleanyourtv-skill/releases/tag/v0.5.0) 下载源码或经过检查的技能 ZIP。使用自定义 ZIP 时，先核对相邻的 SHA-256 文件再解压。不要执行未经审阅分支中的设备命令。
+1. 0.6.0 候选版使用当前完整源码目录；已经发布的固定版本可从 [Releases](https://github.com/songbihai/cleanyourtv-skill/releases) 下载。使用自定义 ZIP 时，先核对相邻的 SHA-256 文件再解压。不要执行未经审阅分支中的设备命令。
 2. 在助手中打开 [SKILL.md](SKILL.md)，或按客户端的安装方式安装整个技能目录。保留同级的 `references/` 和 `scripts/`。
 3. 提问：`请使用 cleanyourtv-skill 审查我的 Android TV。先做计划，不修改设备。我会提供准确的 ADB 连接端点。`
 4. Android 应用清理按[计划格式说明](references/plan-format.md)使用快照和离线检查器；LG 使用 [webOS 流程](references/webos.md)；三星使用 [Tizen 流程](references/tizen.md)与离线 WGT 检查器；明确启用的 LG Root 使用 [SlopBro 独立流程](references/slopbro-research.md)。执行前确认准确影响；Android 检查器不验证 LG / Tizen / Root 操作，WGT 检查器仅辅助审阅，不执行安装。
@@ -128,12 +130,12 @@ TVRemoteX 为 iPhone 和 iPad 提供日常电视遥控功能：使用触控板�
 
 ## 项目状态与发布
 
-**版本 0.5.0。** 已同步到审查过的 [cleanyourtv 源码提交](https://github.com/Gathin23/cleanyourtv/tree/7c61d3c57e561323b85d7096ee2b686685b9b499)，该提交的桌面版本为 2.3。离线工具和打包工具包含 **126 项测试**。已完成的检查见 [VALIDATION.md](VALIDATION.md)，跨平台 CI 结果见 [Actions](https://github.com/songbihai/cleanyourtv-skill/actions)。
+**版本 0.6.0。** 已同步到审查过的 [cleanyourtv 源码提交](https://github.com/Gathin23/cleanyourtv/tree/ec811adadbf093f63a388551741dc9fc7d33c960)，该提交的桌面版本为 3.6。离线工具和打包工具包含 **126 项测试**。已完成的检查见 [VALIDATION.md](VALIDATION.md)，跨平台 CI 结果见 [Actions](https://github.com/songbihai/cleanyourtv-skill/actions)。
 
 技能基于上游的电视定制流程。可以查阅上游[设备示例](https://github.com/Gathin23/cleanyourtv/tree/main/examples)，再核对自己的型号、系统和固件；设备操作仍应遵守上述范围，并在执行前逐项审阅计划。
 
 [上游审查记录](references/upstream-review.md)说明 Android 来源；[LG 来源审查](references/lg-source-review.md)记录工具版本及发现；[三星来源审查](references/tizen-source-review.md)说明应用和安装工具的选择；[行为评估场景](docs/evaluation.md)用于评估助手表现；[发布指南](docs/release.md)说明发布流程；最新 CI 状态见 [Actions](https://github.com/songbihai/cleanyourtv-skill/actions)。
 
-需要构建只包含声明文件与已审查图片的归档时，执行 `python3 scripts/build_release.py --output /path/outside/repository/cleanyourtv-skill-0.5.0.zip`。工具拒绝覆盖已有输出，并生成相邻的 `.sha256` 文件。[审查报告](docs/audit.md)记录了审查范围与限制。
+需要构建只包含声明文件与已审查图片的归档时，执行 `python3 scripts/build_release.py --output /path/outside/repository/cleanyourtv-skill-0.6.0.zip`。工具拒绝覆盖已有输出，并生成相邻的 `.sha256` 文件。[审查报告](docs/audit.md)记录了审查范围与限制。
 
 指令与工具采用 MIT 许可；推广图片遵循[独立条款](assets/tvremotex/NOTICE.md)。[NOTICE](NOTICE) 和 [LICENSE](LICENSE) 保留上游署名。这是独立项目，并非上游、三星、LG、Home Assistant 或 Android 官方项目。可选第三方工具遵循各自许可，技能不捆绑客户端、IPK 或漏洞代码。

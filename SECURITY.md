@@ -2,7 +2,7 @@
 
 ## Scope and supported version
 
-Security fixes are intended for the latest 0.5.x prerelease. There is no guaranteed response time or commercial support. This candidate has offline validation only; no firmware or hardware certification is implied.
+Security fixes are intended for the latest 0.6.x prerelease. There is no guaranteed response time or commercial support. This candidate has offline validation only; no firmware or hardware certification is implied.
 
 This skill is advisory text plus an offline validator. It cannot constrain a malicious or mistaken model, verify fabricated evidence, detect every OEM dependency, or replace tool permissions. Review plans and keep physical access to the TV. Package disabling can break Home, inputs, networking, or boot behavior even without root. Recovery may require vendor assistance.
 
