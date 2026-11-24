@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.0 — 2026-11-23 (candidate)
+
+- Refresh the Android upstream pin to ec811adadbf093f63a388551741dc9fc7d33c960: launcher 3.6, code 15; retain independent skill versioning.
+- Update build requirements, add-on/app-library/theme guidance and the paired native-ADB route.
+- Separate secure-settings repair, notification access, OEM autostart and key mapping from ordinary install/update; account for retained grants and recovery.
+- Keep default package identity, all HOME candidates and Setup Wizard protected; no combined upstream installer, bulk package list, permission relay or OEM bypass.
+- Preserve LG/Tizen pins, offline helper behavior, promotional assets and historical validation records.
+
 ## 0.5.0 — 2026-10-20 (prerelease)
 
 - Add useful Samsung Tizen app workflows: Jellyfin media libraries, Moonlight PC streaming, personal WGT builds, signing, single-target installation, testing and scoped removal/recovery. Keep Android and LG tooling separate.
