@@ -1,5 +1,9 @@
 # Safety, portability, and publication review
 
+## 0.6.0 Android source refresh — 2026-11-23
+
+Reviewed launcher 3.6 build/manifest/configuration, optional-feature documentation and sensitive helper/installer surfaces. Split new access grants from install/update, captured retained grants, excluded OEM package-name impersonation and permission-denial relays, and preserved the existing Android command generator. Review scope and pinned sources are in [upstream-review.md](../references/upstream-review.md); actual checks are in [VALIDATION.md](../VALIDATION.md). LG and Tizen source baselines are unchanged by this Android-focused update.
+
 ## 0.5.0 Tizen apps and explicit LG Root review — 2026-10-20
 
 - Added Tizen outcomes beyond remote control: signed Jellyfin/Moonlight/personal WGT builds, final-artifact inspection, explicit serial and TV application-ID handling, one-install reconciliation and honest update/removal data limits.
